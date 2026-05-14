@@ -384,7 +384,8 @@ body::before {
 .section--proposition { background: var(--cream-soft); }
 
 .featured-question {
-  margin: clamp(3rem, 6vw, 5rem) 0 0;
+  margin: clamp(3rem, 6vw, 5rem) auto 0;
+  max-width: 56rem;
   text-align: center;
   border-top: 1px solid var(--rule);
   border-bottom: 1px solid var(--rule);
@@ -421,35 +422,38 @@ body::before {
 .whatifs {
   list-style: none;
   padding: 0;
-  margin: clamp(3rem, 5vw, 4rem) 0 0;
+  margin: clamp(3rem, 5vw, 4rem) auto 0;
+  max-width: 56rem;
   display: grid;
   gap: 0;
   counter-reset: whatif;
 }
 .whatif {
-  display: grid;
-  grid-template-columns: clamp(3rem, 8vw, 6rem) 1fr;
-  gap: clamp(1.5rem, 3vw, 3rem);
-  align-items: baseline;
-  padding: clamp(1.75rem, 3vw, 2.5rem) 0;
+  display: block;
+  text-align: center;
+  padding: clamp(2rem, 3.5vw, 3rem) 1rem;
   border-top: 1px solid var(--rule);
 }
 .whatif:last-child { border-bottom: 1px solid var(--rule); }
 .whatif__num {
+  display: block;
   font-family: var(--serif);
   font-style: italic;
-  font-size: clamp(1.25rem, 2vw, 1.75rem);
+  font-size: 0.95rem;
   color: var(--accent);
   font-variation-settings: "opsz" 48;
   font-feature-settings: "onum";
+  letter-spacing: 0.04em;
+  margin-bottom: 0.75rem;
 }
 .whatif__text {
   font-family: var(--serif);
   font-size: clamp(1.5rem, 3.5vw, 2.5rem);
   font-weight: 300;
-  line-height: 1.15;
+  line-height: 1.18;
   letter-spacing: -0.015em;
-  margin: 0;
+  margin: 0 auto;
+  max-width: 26ch;
   font-variation-settings: "opsz" 96, "SOFT" 40;
 }
 .whatif__text em {
@@ -460,6 +464,7 @@ body::before {
   font-size: clamp(1rem, 1.5vw, 1.125rem);
   color: var(--ink-soft);
   font-style: italic;
+  max-width: 36ch;
 }
 .whatif--open .whatif__text a {
   color: var(--accent);
