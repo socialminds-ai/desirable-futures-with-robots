@@ -16,9 +16,9 @@ assets/                        # Drop placeholder replacements here.
 
 ## The workshop report form
 
-`form.html` is a print-ready, A4 one-pager that facilitators fill in for each *Desirable Future* their workshop produces (one future per page). It matches the site's visual identity — cream / ink / terracotta, Fraunces serif — but on a white field for ink economy.
+`form.html` is a print-ready, A4 one-pager that workshop researchers fill in for each *Desirable Future* their workshop produces (one future per page). It matches the site's visual identity — cream / ink / terracotta, Fraunces serif — but on a white field for ink economy.
 
-Fields: workshop metadata (date, location, facilitator, target group, format, participants), the *what if* used, title, short description, image space, and four reflection questions (the imagined future, the robot's role/shape/place, what the robot refuses, why it's desirable).
+Fields: workshop metadata (date, location, researcher, target group, format, participants), the *what if* used, title, short description, image space, and four reflection questions (the imagined future, the robot's role/shape/place, what the robot refuses, why it's desirable).
 
 ### Regenerating the PDF
 

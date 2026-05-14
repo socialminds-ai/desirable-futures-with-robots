@@ -416,7 +416,7 @@ body::before {
 
 
 /* =============================================================
-   IV — WHAT IF
+   V — WHAT IF
    ============================================================= */
 
 .whatifs {
@@ -473,93 +473,7 @@ body::before {
 
 
 /* =============================================================
-   V — APPROACH
-   ============================================================= */
-
-.section--approach { background: var(--cream); }
-
-.approach-grid {
-  display: grid;
-  grid-template-columns: 1.6fr 1fr;
-  gap: clamp(2rem, 5vw, 5rem);
-  align-items: start;
-}
-@media (max-width: 800px) {
-  .approach-grid { grid-template-columns: 1fr; }
-}
-
-.approach-flow { display: grid; gap: clamp(1.75rem, 3vw, 2.5rem); }
-.step {
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--rule);
-  display: grid;
-  grid-template-columns: 3rem 1fr;
-  gap: 1rem 1.5rem;
-  align-items: baseline;
-}
-.step__num {
-  font-family: var(--serif);
-  font-style: italic;
-  color: var(--accent);
-  font-size: 1.125rem;
-  font-feature-settings: "onum";
-}
-.step h3 {
-  margin: 0 0 0.5rem;
-  font-family: var(--serif);
-  font-size: clamp(1.25rem, 2vw, 1.625rem);
-  font-weight: 400;
-  letter-spacing: -0.01em;
-}
-.step p {
-  margin: 0;
-  grid-column: 2;
-  color: var(--ink-soft);
-  font-size: 1.0625rem;
-}
-
-.approach-counter {
-  background: var(--ink);
-  color: var(--cream);
-  padding: clamp(2rem, 3vw, 2.75rem);
-  border-radius: 2px;
-}
-.approach-counter__title {
-  margin: 0 0 1.25rem;
-  font-family: var(--sans);
-  font-size: 0.75rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--accent-soft);
-  font-weight: 500;
-}
-.approach-counter__crossed {
-  margin: 0 0 1.5rem;
-  font-family: var(--serif);
-  font-size: 1.25rem;
-  line-height: 1.5;
-  text-decoration: line-through;
-  text-decoration-color: var(--accent);
-  text-decoration-thickness: 1px;
-  color: var(--cream);
-  opacity: 0.85;
-}
-.approach-counter__crossed span {
-  font-style: italic;
-  color: var(--accent-soft);
-  margin-right: 0.4em;
-}
-.approach-counter__note {
-  margin: 0;
-  font-size: 0.9375rem;
-  line-height: 1.55;
-  color: rgba(241, 234, 216, 0.75);
-  font-style: italic;
-}
-
-
-/* =============================================================
-   VI — SERIES
+   IV — SERIES
    ============================================================= */
 
 .section--series { background: var(--cream-soft); }
@@ -625,7 +539,7 @@ body::before {
 
 
 /* =============================================================
-   VII — MATERIALS
+   VI — MATERIALS
    ============================================================= */
 
 .section--materials { background: var(--cream); }
@@ -674,7 +588,7 @@ body::before {
 
 
 /* =============================================================
-   VIII — HORIZON
+   VII — HORIZON
    ============================================================= */
 
 .section--horizon {
@@ -758,7 +672,7 @@ body::before {
 
 
 /* =============================================================
-   IX — COORDINATORS
+   VIII — COORDINATORS
    ============================================================= */
 
 .section--coordinators { background: var(--cream-soft); }
@@ -816,7 +730,7 @@ body::before {
 
 
 /* =============================================================
-   X — JOIN
+   IX — JOIN
    ============================================================= */
 
 .section--join {
