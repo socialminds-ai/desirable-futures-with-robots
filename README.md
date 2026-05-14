@@ -63,14 +63,11 @@ Then open <http://localhost:8000>.
 
 ## Placeholders to commission
 
-Two structural visuals are stubbed in the page. Both are marked with dashed boxes and a description on screen, so nothing breaks before the assets exist.
+One structural visual is still stubbed in the page (the workshops map). The hero illustration and the favicon are in.
 
-### 1. Hero illustration — `assets/hero.svg` (or .png)
+### ~~1. Hero illustration~~ — `assets/hero.png` ✓
 
-- **Location**: top-right of the hero, aspect 4:5, around 22rem wide.
-- **Brief**: An abstract organic mark suggesting *two distinct cognitions in dialogue* — not a humanoid robot, not a chip-and-circuit cliché. Think: a hand-drawn organic form and a geometric form, sharing a space, neither dominant. Ink-on-cream palette, single warm accent (terracotta `#B84A2C`).
-- **Avoid**: anthropomorphic robots, glowing eyes, brain-with-circuits, hands-touching-fingers (Sistine pastiche). The page already does the heavy lifting verbally; the illustration should *enlarge mood*, not narrate.
-- **Replacement**: in `index.html`, swap the `.placeholder--hero` div inside `.hero__art` for `<img src="assets/hero.svg" alt="">`.
+Integrated. Rendered with `mix-blend-mode: multiply` against the cream background so the illustration sits on the page without a visible rectangle edge. To swap for a new version, drop a new `assets/hero.png` (4:5 aspect, cream-on-cream backdrop reads best).
 
 ### 2. Distributed-workshops map — `assets/map.svg`
 
@@ -84,9 +81,9 @@ Two structural visuals are stubbed in the page. Both are marked with dashed boxe
 - **Brief**: One line of typography over the cream background: "Desirable Futures with robots" (matching the wordmark style), with the accent-coloured italic "with robots". Bottom-right: small marker "100 workshops · 2026—2027".
 - This is what people see when the URL is shared on Slack, Mastodon, BlueSky, X.
 
-### 4. Favicon — `assets/favicon.svg` and `assets/favicon-32.png`
+### ~~4. Favicon~~ — `assets/favicon.svg` (+ `favicon-32.png`, `favicon-180.png`) ✓
 
-A single accent-coloured glyph (e.g. an italic ampersand, a slanted mark, or a small dot pattern). Keep it abstract.
+Done. An abstract two-mark composition echoing the hero — an ink organic form alongside a rotated terracotta square — on a rounded cream tile. SVG ships a `prefers-color-scheme: dark` variant for free. Wired into `<head>` of both `index.html` and `form.html`.
 
 ## Editorial choices baked in
 
