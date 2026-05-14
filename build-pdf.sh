@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Render form.html → desirable-futures-form.pdf via headless Chrome.
+# Render kit.html → desirable-futures-kit.pdf via headless Chrome.
 # Requires google-chrome (or chromium) on PATH.
 
 set -euo pipefail
@@ -17,8 +17,8 @@ fi
   --no-sandbox \
   --hide-scrollbars \
   --no-pdf-header-footer \
-  --virtual-time-budget=10000 \
-  --print-to-pdf="desirable-futures-form.pdf" \
-  "file://$PWD/form.html"
+  --virtual-time-budget=15000 \
+  --print-to-pdf="desirable-futures-kit.pdf" \
+  "file://$PWD/kit.html"
 
-echo "→ desirable-futures-form.pdf  ($(du -h desirable-futures-form.pdf | cut -f1))"
+echo "→ desirable-futures-kit.pdf  ($(du -h desirable-futures-kit.pdf | cut -f1))"

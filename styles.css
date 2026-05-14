@@ -586,6 +586,34 @@ body::before {
   line-height: 1.55;
 }
 
+.materials-cta {
+  max-width: 56rem;
+  margin: clamp(2.5rem, 4vw, 3.5rem) auto 0;
+  text-align: center;
+  font-family: var(--serif);
+  font-size: clamp(1.0625rem, 1.5vw, 1.25rem);
+  line-height: 1.55;
+  color: var(--ink-soft);
+  font-style: italic;
+}
+.materials-cta__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  margin-left: 0.4em;
+  color: var(--accent);
+  border-bottom: 1px solid currentColor;
+  font-style: normal;
+  font-weight: 500;
+  transition: gap 0.25s ease, color 0.2s ease;
+}
+.materials-cta__link:hover {
+  color: var(--accent-deep);
+  gap: 0.85em;
+}
+.materials-cta__link .arrow { transition: transform 0.25s ease; }
+.materials-cta__link:hover .arrow { transform: translateX(0.15em); }
+
 
 /* =============================================================
    VII — HORIZON

@@ -8,29 +8,36 @@ A single-page editorial site introducing the *Desirable Futures with Robots* wor
 index.html                     # The landing page.
 styles.css                     # All landing-page styling. Editorial / manifesto.
 script.js                      # Sticky-header state + scroll reveal. No deps.
-form.html                      # One-page workshop report form (source of the PDF).
-build-pdf.sh                   # Regenerates desirable-futures-form.pdf from form.html.
-desirable-futures-form.pdf     # The form, ready to print or share.
-assets/                        # Drop placeholder replacements here.
+kit.html                       # Six-page workshop kit (source of the PDF).
+build-pdf.sh                   # Regenerates desirable-futures-kit.pdf from kit.html.
+desirable-futures-kit.pdf      # The kit, ready to print or share.
+assets/                        # Hero illustration, favicons, map, coordinator photos.
 ```
 
-## The workshop report form
+## The workshop kit
 
-`form.html` is a print-ready, A4 one-pager that workshop researchers fill in for each *Desirable Future* their workshop produces (one future per page). It matches the site's visual identity — cream / ink / terracotta, Fraunces serif — but on a white field for ink economy.
+`kit.html` is a print-ready, six-page A4 document that bundles everything a researcher needs to run a workshop. Each `<div class="page">` renders as one PDF page. It matches the site's visual identity — cream / ink / terracotta, Fraunces serif — but on a white field for ink economy.
 
-Fields: workshop metadata (date, location, researcher, target group, format, participants), the *what if* used, title, short description, image space, and four reflection questions (the imagined future, the robot's role/shape/place, what the robot refuses, why it's desirable).
+Pages:
+
+1. **Cover** — title, hero illustration, version, license.
+2. **Rationale** — the three-section argument (laboratory→industry / dominant framing / reclaiming the narrative) plus the featured question.
+3. **Reversing the narrative** — the *what if* bank: four starting prompts plus three blank slots for the researcher to add their own.
+4. **Translating for your audience** — short notes for children, adolescents, older adults, and workers (warehouse/care/service).
+5. **Workshop formats** — role-play (recommended), drawing, brainstorming, interviews. Each with structure and what to capture.
+6. **Workshop report form** — one fillable A4 page per *Desirable Future* the workshop produces.
 
 ### Regenerating the PDF
 
-Edit `form.html`, then:
+Edit `kit.html`, then:
 
 ```bash
 ./build-pdf.sh
 ```
 
-This renders `form.html` to `desirable-futures-form.pdf` via headless Chrome. Requirements: `google-chrome`, `google-chrome-stable`, or `chromium` on `PATH`. No other dependencies.
+This renders `kit.html` to `desirable-futures-kit.pdf` via headless Chrome. Requirements: `google-chrome`, `google-chrome-stable`, or `chromium` on `PATH`. No other dependencies.
 
-You can also preview the form live in a browser by visiting <http://localhost:8000/form.html> after starting the local server (see below).
+You can also preview the kit live in a browser by visiting <http://localhost:8000/kit.html> after starting the local server (see below).
 
 ## Local preview
 
@@ -56,10 +63,9 @@ Then open <http://localhost:8000>.
 
 ## Things to replace before going live
 
-1. **Email**: `contact@desirable-futures.org` appears in two places in `index.html`. Replace.
+1. **Email**: `contact@desirable-futures.org` appears in `index.html` and `kit.html`. Replace.
 2. **Repository link**: in the Join section and footer (`github.com/<your-org>/desirable-futures`).
-3. **Proposal PDF link**: the "Read the full proposal" button currently links to `#`. Drop the PDF in `assets/` and update the `href`.
-4. **Placeholders** (see below).
+3. **Placeholders** (see below).
 
 ## Placeholders to commission
 
@@ -83,7 +89,7 @@ Integrated. Rendered with `mix-blend-mode: multiply` against the cream backgroun
 
 ### ~~4. Favicon~~ — `assets/favicon.svg` (+ `favicon-32.png`, `favicon-180.png`) ✓
 
-Done. An abstract two-mark composition echoing the hero — an ink organic form alongside a rotated terracotta square — on a rounded cream tile. SVG ships a `prefers-color-scheme: dark` variant for free. Wired into `<head>` of both `index.html` and `form.html`.
+Done. An abstract two-mark composition echoing the hero — an ink organic form alongside a rotated terracotta square — on a rounded cream tile. SVG ships a `prefers-color-scheme: dark` variant for free. Wired into `<head>` of both `index.html` and `kit.html`.
 
 ## Editorial choices baked in
 

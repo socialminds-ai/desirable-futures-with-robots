@@ -1,0 +1,1278 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Desirable Futures with Robots — Workshop kit</title>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ============================================================
+       WORKSHOP KIT — multi-page A4 stylesheet.
+       Visual identity matches the landing site (Fraunces, ink, cream,
+       terracotta). Each <div class="page"> renders as one PDF page.
+       ============================================================ */
+
+    :root {
+      --cream:        #F1EAD8;
+      --cream-soft:   #F7F0DC;
+      --ink:          #1C1A17;
+      --ink-soft:     #4A4239;
+      --ink-faint:    #9C8E78;
+      --rule:         #C7B89A;
+      --rule-soft:    #DCD0B4;
+      --accent:       #B84A2C;
+      --accent-soft:  #E9C0AE;
+      --paper:        #FFFFFF;
+
+      --serif: "Fraunces", "Times New Roman", Georgia, serif;
+      --sans:  "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+    }
+
+    @page {
+      size: A4;
+      margin: 0;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: var(--paper); }
+    body {
+      font-family: var(--serif);
+      color: var(--ink);
+      font-size: 9.5pt;
+      line-height: 1.4;
+      font-feature-settings: "kern", "liga", "calt", "onum";
+      -webkit-font-smoothing: antialiased;
+      print-color-adjust: exact;
+      -webkit-print-color-adjust: exact;
+    }
+
+    /* ============================================================
+       PAGE SCAFFOLD
+       ============================================================ */
+    .page {
+      width: 210mm;
+      height: 297mm;
+      page-break-after: always;
+      break-after: page;
+      overflow: hidden;
+      position: relative;
+    }
+    .page:last-child {
+      page-break-after: auto;
+      break-after: auto;
+    }
+
+
+    /* ============================================================
+       PAGE 1 — COVER
+       ============================================================ */
+    .page--cover {
+      background: var(--cream);
+      display: grid;
+      grid-template-rows: auto 1fr auto auto;
+      padding: 22mm 18mm 14mm;
+    }
+    .cover__eyebrow {
+      font-family: var(--sans);
+      font-size: 8pt;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      display: flex;
+      align-items: center;
+      gap: 6mm;
+    }
+    .cover__eyebrow::after {
+      content: "";
+      flex: 1;
+      height: 0.3mm;
+      background: var(--rule);
+    }
+    .cover__main {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 10mm;
+      align-items: center;
+      padding: 14mm 0;
+    }
+    .cover__title {
+      font-family: var(--serif);
+      font-size: 64pt;
+      font-weight: 300;
+      line-height: 0.95;
+      letter-spacing: -0.035em;
+      font-variation-settings: "opsz" 144, "SOFT" 50;
+      margin: 0;
+    }
+    .cover__title em {
+      display: block;
+      font-style: italic;
+      color: var(--accent);
+      margin-left: 10mm;
+      font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    }
+    .cover__art {
+      aspect-ratio: 4/5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .cover__art img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      mix-blend-mode: multiply;
+    }
+    .cover__subtitle {
+      max-width: 130mm;
+      margin: 0;
+    }
+    .cover__subtitle p {
+      font-family: var(--serif);
+      font-size: 14pt;
+      line-height: 1.35;
+      color: var(--ink);
+      margin: 0;
+      font-weight: 300;
+      font-variation-settings: "opsz" 48;
+    }
+    .cover__subtitle em { font-style: italic; color: var(--accent); }
+    .cover__bottom {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8mm;
+      padding-top: 8mm;
+      border-top: 0.4mm solid var(--accent);
+      align-items: end;
+    }
+    .cover__meta-item .label {
+      display: block;
+      font-family: var(--sans);
+      font-size: 7pt;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      margin-bottom: 1.5mm;
+    }
+    .cover__meta-item .value {
+      font-family: var(--serif);
+      font-size: 11pt;
+      color: var(--ink);
+      line-height: 1.3;
+    }
+    .cover__meta-item .value em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+
+    /* ============================================================
+       CONTENT PAGES — shared header / body / footer
+       ============================================================ */
+    .page--content {
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+    }
+    .page-header {
+      background: var(--cream);
+      padding: 7mm 14mm 6mm;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 4mm;
+      border-bottom: 0.4mm solid var(--accent);
+    }
+    .page-header__wordmark {
+      font-family: var(--serif);
+      font-size: 13pt;
+      font-weight: 300;
+      letter-spacing: -0.02em;
+      line-height: 1;
+      font-variation-settings: "opsz" 96, "SOFT" 50;
+    }
+    .page-header__wordmark em {
+      font-style: italic;
+      color: var(--accent);
+      font-variation-settings: "opsz" 96, "SOFT" 100, "WONK" 1;
+    }
+    .page-header__right {
+      display: grid;
+      gap: 0.8mm;
+      justify-items: end;
+      font-family: var(--sans);
+      font-size: 6.5pt;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+    }
+    .page-header__section {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 10pt;
+      letter-spacing: 0;
+      text-transform: none;
+      color: var(--accent);
+      font-variation-settings: "opsz" 48, "SOFT" 80;
+    }
+    .page-body {
+      padding: 10mm 14mm;
+      overflow: hidden;
+    }
+    .page-footer {
+      background: var(--cream);
+      padding: 4mm 14mm 5mm;
+      border-top: 0.4mm solid var(--accent);
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 6mm;
+      font-family: var(--sans);
+      font-size: 6.5pt;
+      letter-spacing: 0.06em;
+      color: var(--ink-soft);
+      line-height: 1.45;
+    }
+    .page-footer__right { text-align: right; }
+    .page-footer strong { color: var(--ink); font-weight: 600; }
+    .page-footer__center {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 8pt;
+      color: var(--accent);
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+    }
+
+
+    /* ============================================================
+       PAGE 2 — RATIONALE (roman-numeral sections)
+       ============================================================ */
+    .roman-section {
+      display: grid;
+      grid-template-columns: 6mm 1fr;
+      gap: 4mm;
+      margin-bottom: 4mm;
+    }
+    .roman-section + .roman-section { margin-top: 6mm; }
+    .roman-section__num {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 9pt;
+      color: var(--accent);
+      padding-top: 2mm;
+      font-feature-settings: "smcp", "onum";
+      letter-spacing: 0.04em;
+    }
+    .roman-section__body h3 {
+      font-family: var(--serif);
+      font-size: 15pt;
+      font-weight: 300;
+      line-height: 1.12;
+      letter-spacing: -0.02em;
+      margin: 0 0 2.5mm;
+      font-variation-settings: "opsz" 96, "SOFT" 40;
+    }
+    .roman-section__body p {
+      margin: 0 0 2mm;
+      font-size: 9.5pt;
+      line-height: 1.45;
+      color: var(--ink);
+    }
+    .roman-section__body p:last-child { margin-bottom: 0; }
+    .roman-section__body em { font-style: italic; }
+    .roman-section__body strong { font-weight: 600; }
+
+    .pullquote-line {
+      padding: 1.5mm 0 1.5mm 4mm;
+      border-left: 0.5mm solid var(--accent);
+      font-style: italic;
+      color: var(--ink);
+      margin: 2.5mm 0 !important;
+    }
+
+    .featured-q {
+      margin: 6mm 0 0;
+      padding: 5mm 0 0;
+      border-top: 0.3mm solid var(--rule);
+      text-align: center;
+    }
+    .featured-q blockquote {
+      margin: 0;
+      font-family: var(--serif);
+      font-size: 17pt;
+      font-weight: 300;
+      line-height: 1.18;
+      letter-spacing: -0.02em;
+      font-variation-settings: "opsz" 96, "SOFT" 50;
+    }
+    .featured-q blockquote em {
+      font-style: italic;
+      color: var(--accent);
+      font-variation-settings: "opsz" 96, "SOFT" 100, "WONK" 1;
+    }
+
+
+    /* ============================================================
+       PAGE 3 — WHAT-IF BANK
+       ============================================================ */
+    .page-intro {
+      font-family: var(--serif);
+      font-size: 11pt;
+      line-height: 1.45;
+      color: var(--ink);
+      max-width: 155mm;
+      margin: 0 0 6mm;
+    }
+    .page-intro em { font-style: italic; }
+    .page-intro .accent { color: var(--accent); font-style: italic; }
+
+    .whatif-bank {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .whatif-bank > li {
+      display: grid;
+      grid-template-columns: 11mm 1fr;
+      gap: 4mm;
+      padding: 4mm 0;
+      border-top: 0.25mm solid var(--rule);
+      align-items: baseline;
+    }
+    .whatif-bank > li:last-child { border-bottom: 0.25mm solid var(--rule); }
+    .whatif-bank__num {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 11pt;
+      color: var(--accent);
+      font-feature-settings: "onum";
+    }
+    .whatif-bank__text {
+      font-family: var(--serif);
+      font-size: 13.5pt;
+      font-weight: 300;
+      line-height: 1.22;
+      letter-spacing: -0.01em;
+      font-variation-settings: "opsz" 72, "SOFT" 40;
+      margin: 0;
+    }
+    .whatif-bank__text em { font-style: italic; color: var(--accent); }
+
+    .whatif-blank__text {
+      height: 7mm;
+      border-bottom: 0.25mm solid var(--ink-faint);
+    }
+    .whatif-blank-label {
+      font-family: var(--sans);
+      font-size: 7pt;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      margin: 8mm 0 3mm;
+    }
+
+
+    /* ============================================================
+       PAGE 4 — AUDIENCES (2×2 grid of cards)
+       ============================================================ */
+    .audience-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5mm;
+      margin-top: 3mm;
+    }
+    .audience-card {
+      border: 0.3mm solid var(--rule);
+      padding: 5mm;
+      display: grid;
+      gap: 3mm;
+      background: var(--cream-soft);
+    }
+    .audience-card h3 {
+      font-family: var(--serif);
+      font-size: 14pt;
+      font-weight: 400;
+      line-height: 1.1;
+      letter-spacing: -0.015em;
+      margin: 0;
+      color: var(--ink);
+      font-variation-settings: "opsz" 72, "SOFT" 30;
+    }
+    .audience-card__rows {
+      display: grid;
+      gap: 2.2mm;
+    }
+    .audience-row {
+      display: grid;
+      gap: 0.6mm;
+    }
+    .audience-row__label {
+      font-family: var(--sans);
+      font-size: 6pt;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .audience-row__body {
+      font-family: var(--serif);
+      font-size: 8.5pt;
+      line-height: 1.4;
+      color: var(--ink);
+      margin: 0;
+    }
+    .audience-row__body em { font-style: italic; }
+
+
+    /* ============================================================
+       PAGE 5 — WORKSHOP FORMATS
+       ============================================================ */
+    .format-list {
+      list-style: none;
+      padding: 0;
+      margin: 3mm 0 0;
+      display: grid;
+      gap: 0;
+    }
+    .format-list > li {
+      padding: 5mm 0;
+      border-top: 0.25mm solid var(--rule);
+      display: grid;
+      grid-template-columns: 42mm 1fr;
+      gap: 6mm;
+    }
+    .format-list > li:last-child { border-bottom: 0.25mm solid var(--rule); }
+    .format__head {
+      display: grid;
+      gap: 1.5mm;
+      align-content: start;
+    }
+    .format__name {
+      font-family: var(--serif);
+      font-size: 14pt;
+      font-weight: 400;
+      line-height: 1.05;
+      letter-spacing: -0.015em;
+      margin: 0;
+      font-variation-settings: "opsz" 72, "SOFT" 30;
+    }
+    .format__tag {
+      display: inline-block;
+      font-family: var(--sans);
+      font-size: 6pt;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--cream);
+      background: var(--accent);
+      padding: 0.6mm 2mm;
+      border-radius: 1mm;
+      justify-self: start;
+    }
+    .format__meta {
+      font-family: var(--sans);
+      font-size: 6.5pt;
+      letter-spacing: 0.04em;
+      color: var(--ink-soft);
+      line-height: 1.4;
+    }
+    .format__body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4mm;
+    }
+    .format__body h4 {
+      font-family: var(--sans);
+      font-size: 6.5pt;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin: 0 0 1mm;
+    }
+    .format__body p {
+      font-family: var(--serif);
+      font-size: 8.5pt;
+      line-height: 1.4;
+      color: var(--ink);
+      margin: 0;
+    }
+    .format__body em { font-style: italic; }
+
+
+    /* ============================================================
+       PAGE 6 — REPORT FORM (kept from the previous form.html)
+       ============================================================ */
+    .page--form {
+      display: grid;
+      grid-template-rows:
+        auto    /* header */
+        auto    /* metadata */
+        auto    /* what if */
+        auto    /* title */
+        auto    /* description */
+        1fr     /* image */
+        auto    /* reflections */
+        auto;   /* footer */
+      gap: 0;
+    }
+
+    .header {
+      background: var(--cream);
+      padding: 9mm 14mm 7mm;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: end;
+      gap: 1.5mm;
+      border-bottom: 0.4mm solid var(--accent);
+    }
+    .header__left { display: grid; gap: 1.5mm; }
+    .wordmark {
+      font-family: var(--serif);
+      font-size: 20pt;
+      font-weight: 300;
+      line-height: 1;
+      letter-spacing: -0.025em;
+      font-variation-settings: "opsz" 144, "SOFT" 50;
+    }
+    .wordmark em {
+      font-style: italic;
+      color: var(--accent);
+      font-weight: 300;
+      font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    }
+    .header__sub {
+      font-family: var(--sans);
+      font-size: 7pt;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+    }
+    .header__right {
+      display: grid;
+      gap: 0.8mm;
+      justify-items: end;
+      font-family: var(--sans);
+      font-size: 7pt;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+    }
+    .report-no {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 10.5pt;
+      letter-spacing: 0;
+      text-transform: none;
+      color: var(--ink);
+      display: inline-flex;
+      align-items: baseline;
+      gap: 1mm;
+    }
+    .report-no .field {
+      display: inline-block;
+      min-width: 10mm;
+      border-bottom: 0.3mm solid var(--ink-faint);
+      padding: 0 1mm;
+    }
+
+    .meta {
+      padding: 5mm 14mm 0;
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 0 4mm;
+      border-bottom: 0.2mm solid var(--rule-soft);
+      padding-bottom: 5mm;
+    }
+    .field-cell { display: flex; flex-direction: column; gap: 1mm; }
+    .field-cell__label {
+      font-family: var(--sans);
+      font-size: 6.5pt;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+    }
+    .field-cell__rule {
+      height: 5mm;
+      border-bottom: 0.3mm solid var(--ink-faint);
+    }
+    .field-cell__hint {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 7pt;
+      color: var(--ink-faint);
+      margin-top: 0.5mm;
+    }
+
+    .whatif {
+      padding: 5mm 14mm 4mm;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      align-items: end;
+      gap: 4mm;
+    }
+    .whatif__prompt {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 12pt;
+      color: var(--accent);
+      font-variation-settings: "opsz" 96, "SOFT" 80;
+      line-height: 1;
+    }
+    .whatif__rule {
+      height: 6mm;
+      border-bottom: 0.4mm solid var(--ink-faint);
+    }
+
+    .title-block { padding: 4mm 14mm 0; display: grid; gap: 1mm; }
+    .title-block__label {
+      font-family: var(--sans);
+      font-size: 6.5pt;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+    }
+    .title-block__rule { height: 9mm; border-bottom: 0.4mm solid var(--ink); }
+
+    .desc { padding: 5mm 14mm 0; display: grid; gap: 1.5mm; }
+    .desc__label {
+      font-family: var(--sans);
+      font-size: 6.5pt;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+    }
+    .desc__lines { display: grid; gap: 5.5mm; }
+    .desc__lines > span { height: 0; border-bottom: 0.25mm solid var(--ink-faint); }
+
+    .image-area {
+      padding: 5mm 14mm 5mm;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5mm;
+      min-height: 0;
+    }
+    .image-area__label {
+      font-family: var(--sans);
+      font-size: 6.5pt;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+    .image-area__hint {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 7.5pt;
+      letter-spacing: 0;
+      text-transform: none;
+      color: var(--ink-faint);
+    }
+    .image-box {
+      flex: 1;
+      border: 0.3mm solid var(--ink-faint);
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48mm;
+    }
+    .image-box::before,
+    .image-box::after,
+    .image-box .corner-tl,
+    .image-box .corner-br {
+      content: "";
+      position: absolute;
+      width: 4mm;
+      height: 4mm;
+      border: 0.5mm solid var(--accent);
+    }
+    .image-box::before { top: -0.5mm; left: -0.5mm; border-right: none; border-bottom: none; }
+    .image-box::after  { top: -0.5mm; right: -0.5mm; border-left: none; border-bottom: none; }
+    .image-box .corner-tl { bottom: -0.5mm; left: -0.5mm; border-right: none; border-top: none; }
+    .image-box .corner-br { bottom: -0.5mm; right: -0.5mm; border-left: none; border-top: none; }
+    .image-box__placeholder {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 10pt;
+      color: var(--ink-faint);
+      text-align: center;
+      max-width: 60mm;
+      line-height: 1.4;
+    }
+
+    .reflections {
+      padding: 0 14mm 4mm;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4mm 7mm;
+    }
+    .reflection { display: grid; gap: 1mm; }
+    .reflection__header {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 2mm;
+      align-items: baseline;
+    }
+    .reflection__num {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 9pt;
+      color: var(--accent);
+      font-feature-settings: "onum";
+    }
+    .reflection__label {
+      font-family: var(--serif);
+      font-size: 9.5pt;
+      font-weight: 400;
+      color: var(--ink);
+      line-height: 1.25;
+    }
+    .reflection__label em { font-style: italic; color: var(--accent); }
+    .reflection__lines { display: grid; gap: 4mm; margin-top: 1mm; }
+    .reflection__lines > span {
+      height: 0;
+      border-bottom: 0.22mm solid var(--ink-faint);
+    }
+
+    .footer {
+      background: var(--cream);
+      padding: 4mm 14mm 5mm;
+      border-top: 0.4mm solid var(--accent);
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 6mm;
+    }
+    .footer__left, .footer__right {
+      font-family: var(--sans);
+      font-size: 6.5pt;
+      letter-spacing: 0.06em;
+      color: var(--ink-soft);
+      line-height: 1.45;
+    }
+    .footer__right { text-align: right; }
+    .footer__left strong, .footer__right strong { color: var(--ink); font-weight: 600; }
+    .footer__center {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 8pt;
+      color: var(--accent);
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+    }
+  </style>
+</head>
+<body>
+
+
+<!-- ============================================================
+     PAGE 1 — COVER
+     ============================================================ -->
+<div class="page page--cover">
+
+  <div class="cover__eyebrow">
+    <span>An open invitation to the HRI community · 2026—2027</span>
+  </div>
+
+  <div class="cover__main">
+    <h1 class="cover__title">
+      Desirable Futures
+      <em>with robots</em>
+    </h1>
+    <div class="cover__art">
+      <img src="assets/hero.png" alt="" />
+    </div>
+  </div>
+
+  <div class="cover__subtitle">
+    <p>
+      A series of distributed workshops, inventing a caring, feminist, <em>humanist</em> narrative for social robots — reclaiming a question that has, so far, been answered mostly outside HRI.
+    </p>
+  </div>
+
+  <div class="cover__bottom">
+    <div class="cover__meta-item">
+      <span class="label">Document</span>
+      <span class="value">Researcher kit <em>v1.0</em></span>
+    </div>
+    <div class="cover__meta-item">
+      <span class="label">Read more</span>
+      <span class="value">desirable-futures.org</span>
+    </div>
+    <div class="cover__meta-item">
+      <span class="label">License</span>
+      <span class="value">CC BY-SA 4.0</span>
+    </div>
+  </div>
+
+</div>
+
+
+<!-- ============================================================
+     PAGE 2 — RATIONALE
+     ============================================================ -->
+<div class="page page--content">
+
+  <header class="page-header">
+    <div class="page-header__wordmark">Desirable Futures<em>&nbsp;with robots</em></div>
+    <div class="page-header__right">
+      <span class="page-header__section">Rationale</span>
+      <span>Page 1 / 5 · Kit v1.0</span>
+    </div>
+  </header>
+
+  <div class="page-body">
+
+    <div class="roman-section">
+      <span class="roman-section__num">I</span>
+      <div class="roman-section__body">
+        <h3>From laboratory to industry.</h3>
+        <p>
+          Robotics is shifting fast. In the past three years, parts of the field — humanoid platforms most visibly, but also home, delivery, service, and care robots — have moved from laboratory subfields to industry-led races: multi-trillion-dollar market forecasts, sizeable state investment in China, South Korea, and elsewhere, and capable, increasingly affordable platforms reaching the market (Unitree's G1 humanoid at around $16K USD is one indicator).
+        </p>
+        <p>
+          Within one to two years, autonomous and semi-autonomous robots — humanoid or otherwise — are expected to be present in everyday life: at home, at work, in care, in public space. HRI has a narrow window in which to shape the discourse. Practically, the next eighteen to twenty-four months.
+        </p>
+      </div>
+    </div>
+
+    <div class="roman-section">
+      <span class="roman-section__num">II</span>
+      <div class="roman-section__body">
+        <h3>Efficiency. Productivity. Replacement.</h3>
+        <p>
+          The prevailing framing rests on a stable set of arguments: robots will perform jobs that are dull, dirty, or dangerous; offset labour shortages; save human time; and — most visibly through the humanoid wave — represent the next stage of the AI race, a step from text and image into <em>physical AI</em>.
+        </p>
+        <p class="pullquote-line">
+          Across these arguments runs a consistent through-line: robots are positioned in <strong>competition with humans</strong> — on labour, on time, on capability.
+        </p>
+        <p>
+          The early effects of letting this framing harden are visible in generative AI. With embodied robots — humanoid or otherwise — the same logic extends into domestic, relational, civic, and intimate domains, settings where the criteria of <em>efficiency</em> and <em>replacement</em> translate poorly.
+        </p>
+      </div>
+    </div>
+
+    <div class="roman-section">
+      <span class="roman-section__num">III</span>
+      <div class="roman-section__body">
+        <h3>Reclaiming the narrative.</h3>
+        <p>
+          Without explicit debate, much of robotics has begun to converge on a narrow vision — robots as efficient surrogates for human labour, with the humanoid form as the most visible default. The convergence is largely silent: never formally decided, never ethically justified, sustained by media coverage, capital, and funding incentives.
+        </p>
+        <p>
+          It deserves to be examined. <em>Human-centred</em> design is not the same as <em>human-shaped</em> design — and the question is not only how to design a robot, but whether and when a robot is the right answer at all. The HRI community has a responsibility to keep these distinctions live, and, where possible, to <strong>reclaim the narrative</strong>.
+        </p>
+      </div>
+    </div>
+
+    <figure class="featured-q">
+      <blockquote>
+        Can we invent a caring, feminist, <em>humanist</em> narrative for social robots?
+      </blockquote>
+    </figure>
+
+  </div>
+
+  <footer class="page-footer">
+    <div><strong>Contact:</strong> contact@desirable-futures.org</div>
+    <div class="page-footer__center">Plant a seed.</div>
+    <div class="page-footer__right"><strong>CC BY-SA 4.0</strong> · desirable-futures.org</div>
+  </footer>
+
+</div>
+
+
+<!-- ============================================================
+     PAGE 3 — REVERSING THE NARRATIVE (what-if bank)
+     ============================================================ -->
+<div class="page page--content">
+
+  <header class="page-header">
+    <div class="page-header__wordmark">Desirable Futures<em>&nbsp;with robots</em></div>
+    <div class="page-header__right">
+      <span class="page-header__section">Reversing the narrative</span>
+      <span>Page 2 / 5 · Kit v1.0</span>
+    </div>
+  </header>
+
+  <div class="page-body">
+
+    <p class="page-intro">
+      Each workshop opens with a <em>what if</em> that reverses one element of the dominant framing — and asks participants to imagine a desirable future growing from there. <span class="accent">Not dystopia. Not subversion for its own sake.</span> A future they would actually want.
+    </p>
+
+    <p class="page-intro" style="margin-top: -2mm;">
+      Below: the starting bank. Pick one, adapt one, or invent your own. Send new prompts back so the bank grows.
+    </p>
+
+    <ol class="whatif-bank">
+      <li>
+        <span class="whatif-bank__num">01</span>
+        <p class="whatif-bank__text">What if robots <em>didn't always say yes</em> to our orders?</p>
+      </li>
+      <li>
+        <span class="whatif-bank__num">02</span>
+        <p class="whatif-bank__text">What if a robot was <em>clumsy</em>, and needed our help — all the time?</p>
+      </li>
+      <li>
+        <span class="whatif-bank__num">03</span>
+        <p class="whatif-bank__text">What if a robot didn't try to <em>save</em> your time, but to <em>waste it well</em>?</p>
+      </li>
+      <li>
+        <span class="whatif-bank__num">04</span>
+        <p class="whatif-bank__text">What if a robot brought you <em>something you never asked for</em>?</p>
+      </li>
+    </ol>
+
+    <p class="whatif-blank-label">Add your own</p>
+    <ol class="whatif-bank">
+      <li>
+        <span class="whatif-bank__num">05</span>
+        <div class="whatif-blank__text"></div>
+      </li>
+      <li>
+        <span class="whatif-bank__num">06</span>
+        <div class="whatif-blank__text"></div>
+      </li>
+      <li>
+        <span class="whatif-bank__num">07</span>
+        <div class="whatif-blank__text"></div>
+      </li>
+    </ol>
+
+  </div>
+
+  <footer class="page-footer">
+    <div><strong>Send new prompts to:</strong> contact@desirable-futures.org</div>
+    <div class="page-footer__center">Reverse, then imagine.</div>
+    <div class="page-footer__right"><strong>CC BY-SA 4.0</strong> · desirable-futures.org</div>
+  </footer>
+
+</div>
+
+
+<!-- ============================================================
+     PAGE 4 — TRANSLATING FOR YOUR AUDIENCE
+     ============================================================ -->
+<div class="page page--content">
+
+  <header class="page-header">
+    <div class="page-header__wordmark">Desirable Futures<em>&nbsp;with robots</em></div>
+    <div class="page-header__right">
+      <span class="page-header__section">Translating for your audience</span>
+      <span>Page 3 / 5 · Kit v1.0</span>
+    </div>
+  </header>
+
+  <div class="page-body">
+
+    <p class="page-intro">
+      The rationale needs translation, not simplification. Below: short notes for four common audiences. Adapt to your context, your language, your room. These are starting points, not scripts.
+    </p>
+
+    <div class="audience-grid">
+
+      <div class="audience-card">
+        <h3>Children</h3>
+        <div class="audience-card__rows">
+          <div class="audience-row">
+            <span class="audience-row__label">Introduce as</span>
+            <p class="audience-row__body">A storybook framing. <em>"Imagine a robot who…"</em> Centre the robot as a character with feelings, quirks, and refusals — not a tool.</p>
+          </div>
+          <div class="audience-row">
+            <span class="audience-row__label">Inversions that resonate</span>
+            <p class="audience-row__body">Clumsiness. Surprise gifts. A robot that doesn't always say yes. Friendship over function.</p>
+          </div>
+          <div class="audience-row">
+            <span class="audience-row__label">Watch-outs</span>
+            <p class="audience-row__body">Avoid abstract policy framings. Avoid scary-robot tropes. Keep concrete and playful.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="audience-card">
+        <h3>Adolescents</h3>
+        <div class="audience-card__rows">
+          <div class="audience-row">
+            <span class="audience-row__label">Introduce as</span>
+            <p class="audience-row__body">A speculative-design brief. <em>"Design the robot you would actually want — for yourself, in five years."</em></p>
+          </div>
+          <div class="audience-row">
+            <span class="audience-row__label">Inversions that resonate</span>
+            <p class="audience-row__body">Refusal. Identity. Time-wasting (in good ways). Robots that protect rather than monitor.</p>
+          </div>
+          <div class="audience-row">
+            <span class="audience-row__label">Watch-outs</span>
+            <p class="audience-row__body">Don't moralise. Don't anchor only to school-or-work framings. Make space for ambivalence.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="audience-card">
+        <h3>Older adults</h3>
+        <div class="audience-card__rows">
+          <div class="audience-row">
+            <span class="audience-row__label">Introduce as</span>
+            <p class="audience-row__body">A conversation about everyday life and care, not technology. Start from <em>what works well now</em> and ask where a robot might fit — if at all.</p>
+          </div>
+          <div class="audience-row">
+            <span class="audience-row__label">Inversions that resonate</span>
+            <p class="audience-row__body">Needing-help (from the robot, not toward it). Presence over function. Robots that <em>aren't</em> caregivers.</p>
+          </div>
+          <div class="audience-row">
+            <span class="audience-row__label">Watch-outs</span>
+            <p class="audience-row__body">Avoid framings that read as condescending. The "lonely older person + companion robot" assumption deserves to be opened, not reinforced.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="audience-card">
+        <h3>Workers (warehouse, care, service)</h3>
+        <div class="audience-card__rows">
+          <div class="audience-row">
+            <span class="audience-row__label">Introduce as</span>
+            <p class="audience-row__body">A frank discussion about the workplace they know — what's dignified about it, what's not, where robots are already arriving, and what a desirable shift would look like.</p>
+          </div>
+          <div class="audience-row">
+            <span class="audience-row__label">Inversions that resonate</span>
+            <p class="audience-row__body">Co-presence rather than replacement. Robots that hand off rather than take over. Time given back, on the worker's terms.</p>
+          </div>
+          <div class="audience-row">
+            <span class="audience-row__label">Watch-outs</span>
+            <p class="audience-row__body">Acknowledge precarity directly. Avoid techno-optimism. Be specific about who benefits and who pays in each scenario.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <footer class="page-footer">
+    <div><strong>Adapt freely.</strong> Send back what worked.</div>
+    <div class="page-footer__center">Translate, don't simplify.</div>
+    <div class="page-footer__right"><strong>CC BY-SA 4.0</strong> · desirable-futures.org</div>
+  </footer>
+
+</div>
+
+
+<!-- ============================================================
+     PAGE 5 — WORKSHOP FORMATS
+     ============================================================ -->
+<div class="page page--content">
+
+  <header class="page-header">
+    <div class="page-header__wordmark">Desirable Futures<em>&nbsp;with robots</em></div>
+    <div class="page-header__right">
+      <span class="page-header__section">Workshop formats</span>
+      <span>Page 4 / 5 · Kit v1.0</span>
+    </div>
+  </header>
+
+  <div class="page-body">
+
+    <p class="page-intro">
+      Each workshop should produce at least one <em>desirable future</em>, captured on the report form (page 5). Four formats below — pick the one that fits your audience, time, and space. Role-play is recommended: it places people <em>in</em> situation rather than reasoning <em>about</em> it.
+    </p>
+
+    <ul class="format-list">
+
+      <li>
+        <div class="format__head">
+          <span class="format__tag">Recommended</span>
+          <h3 class="format__name">Role-play / theatre</h3>
+          <span class="format__meta">~60 min · groups of 3–6 · low-prop, low-cost</span>
+        </div>
+        <div class="format__body">
+          <div>
+            <h4>Structure</h4>
+            <p>Introduce one <em>what if</em>. Assign roles (a person, the robot, an observer). Play out a five-minute scene. Debrief. Re-play with one element changed.</p>
+          </div>
+          <div>
+            <h4>What to capture</h4>
+            <p>Title of the scene; who/what/where; the moment of the desirable future; what changed between runs.</p>
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="format__head">
+          <h3 class="format__name">Drawing</h3>
+          <span class="format__meta">~45 min · individuals, then share · paper + pens</span>
+        </div>
+        <div class="format__body">
+          <div>
+            <h4>Structure</h4>
+            <p>Introduce the <em>what if</em>. Fifteen minutes of individual sketching (the robot, the moment, the place). Round-robin share. Cluster ideas.</p>
+          </div>
+          <div>
+            <h4>What to capture</h4>
+            <p>One to three representative sketches with brief captions. The cluster of ideas the group recognised in common.</p>
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="format__head">
+          <h3 class="format__name">Brainstorming</h3>
+          <span class="format__meta">~30 min · small group · post-its or notebook</span>
+        </div>
+        <div class="format__body">
+          <div>
+            <h4>Structure</h4>
+            <p>Three minutes of silent ideation. Round-robin share. Cluster on the wall or page. Vote on the two ideas the group wants to live in.</p>
+          </div>
+          <div>
+            <h4>What to capture</h4>
+            <p>The top two or three desirable futures with the rationale the group gave for each.</p>
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="format__head">
+          <h3 class="format__name">Interviews</h3>
+          <span class="format__meta">~30 min per pair · one-on-one or pairs</span>
+        </div>
+        <div class="format__body">
+          <div>
+            <h4>Structure</h4>
+            <p>Introduce the <em>what if</em>. Open-ended questions about the person's life, then about how a robot might fit (if at all). Record answers carefully.</p>
+          </div>
+          <div>
+            <h4>What to capture</h4>
+            <p>One to three direct quotes; the recurring concerns or hopes across interviews; the desirable future each person sketched out in their own words.</p>
+          </div>
+        </div>
+      </li>
+
+    </ul>
+
+  </div>
+
+  <footer class="page-footer">
+    <div><strong>Mix and match.</strong> Adapt to your room.</div>
+    <div class="page-footer__center">Place people <em>in</em> situation.</div>
+    <div class="page-footer__right"><strong>CC BY-SA 4.0</strong> · desirable-futures.org</div>
+  </footer>
+
+</div>
+
+
+<!-- ============================================================
+     PAGE 6 — WORKSHOP REPORT FORM
+     ============================================================ -->
+<div class="page page--form">
+
+  <header class="header">
+    <div class="header__left">
+      <div class="wordmark">Desirable Futures<em>&nbsp;with robots</em></div>
+      <div class="header__sub">Workshop report form · One desirable future per page · Kit page 5 / 5</div>
+    </div>
+    <div class="header__right">
+      <div class="report-no">Report
+        <span class="field">&nbsp;</span>
+        <span style="color: var(--ink-faint); font-style: italic;">of</span>
+        <span class="field">&nbsp;</span>
+      </div>
+      <div>Series 2026—2027 · v1.0</div>
+    </div>
+  </header>
+
+  <section class="meta">
+    <div class="field-cell"><span class="field-cell__label">Date</span><span class="field-cell__rule"></span></div>
+    <div class="field-cell"><span class="field-cell__label">Location</span><span class="field-cell__rule"></span></div>
+    <div class="field-cell"><span class="field-cell__label">Researcher</span><span class="field-cell__rule"></span></div>
+    <div class="field-cell"><span class="field-cell__label">Target group</span><span class="field-cell__rule"></span></div>
+    <div class="field-cell">
+      <span class="field-cell__label">Format</span>
+      <span class="field-cell__rule"></span>
+      <span class="field-cell__hint">role-play, drawing, brainstorming, interview…</span>
+    </div>
+    <div class="field-cell"><span class="field-cell__label">Participants</span><span class="field-cell__rule"></span></div>
+  </section>
+
+  <section class="whatif">
+    <div class="whatif__prompt">What if&hellip;</div>
+    <div class="whatif__rule"></div>
+  </section>
+
+  <section class="title-block">
+    <span class="title-block__label">Title of this Desirable Future</span>
+    <span class="title-block__rule"></span>
+  </section>
+
+  <section class="desc">
+    <span class="desc__label">Short description</span>
+    <div class="desc__lines">
+      <span></span><span></span><span></span><span></span>
+    </div>
+  </section>
+
+  <section class="image-area">
+    <div class="image-area__label">
+      <span>Image</span>
+      <span class="image-area__hint">Sketch directly, photograph, or attach separately and reference here.</span>
+    </div>
+    <div class="image-box">
+      <span class="corner-tl"></span>
+      <span class="corner-br"></span>
+      <span class="image-box__placeholder">A drawing, a diagram, a photo of the workshop output — anything that helps the future feel concrete.</span>
+    </div>
+  </section>
+
+  <section class="reflections">
+    <div class="reflection">
+      <div class="reflection__header">
+        <span class="reflection__num">01</span>
+        <span class="reflection__label">What <em>future</em> does this imagine? (Not the robot — the life around it.)</span>
+      </div>
+      <div class="reflection__lines"><span></span><span></span><span></span></div>
+    </div>
+
+    <div class="reflection">
+      <div class="reflection__header">
+        <span class="reflection__num">02</span>
+        <span class="reflection__label">The robot's <em>role, shape, and place</em> in that future.</span>
+      </div>
+      <div class="reflection__lines"><span></span><span></span><span></span></div>
+    </div>
+
+    <div class="reflection">
+      <div class="reflection__header">
+        <span class="reflection__num">03</span>
+        <span class="reflection__label">What does this robot <em>refuse</em> — or simply not do?</span>
+      </div>
+      <div class="reflection__lines"><span></span><span></span><span></span></div>
+    </div>
+
+    <div class="reflection">
+      <div class="reflection__header">
+        <span class="reflection__num">04</span>
+        <span class="reflection__label">Why is this future <em>desirable</em>?</span>
+      </div>
+      <div class="reflection__lines"><span></span><span></span><span></span></div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer__left">
+      <strong>Submit:</strong> contact@desirable-futures.org<br />
+      or open a pull request at github.com/&lt;your-org&gt;/desirable-futures
+    </div>
+    <div class="footer__center">Plant a seed.</div>
+    <div class="footer__right">
+      <strong>CC BY-SA 4.0</strong><br />
+      desirable-futures.org · One page, one future
+    </div>
+  </footer>
+
+</div>
+
+
+</body>
+</html>
