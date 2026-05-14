@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Desirable Futures with Robots">
+  <title>Desirable Futures with Robots</title>
+  <style>
+    .bg     { fill: #F1EAD8; }
+    .ink    { fill: #1C1A17; }
+    .accent { fill: #B84A2C; }
+    @media (prefers-color-scheme: dark) {
+      .bg  { fill: #1C1A17; }
+      .ink { fill: #F1EAD8; }
+    }
+  </style>
+
+  <!-- cream rounded square -->
+  <rect class="bg" width="64" height="64" rx="14"/>
+
+  <!-- organic ink form (the human / soft cognition) -->
+  <path class="ink"
+        d="M16 18
+           C 9 22, 8 34, 13 42
+           C 19 50, 30 49, 35 41
+           C 41 32, 39 21, 32 16
+           C 25 11, 19 13, 16 18 Z"/>
+
+  <!-- geometric terracotta mark (the machine / other cognition) -->
+  <rect class="accent" x="40" y="24" width="16" height="16" rx="1.5"
+        transform="rotate(18 48 32)"/>
+</svg>
