@@ -633,7 +633,7 @@ body::before {
 .materials-list {
   list-style: none;
   padding: 0;
-  margin: clamp(3rem, 5vw, 4rem) 0 0;
+  margin: clamp(3rem, 5vw, 4rem) auto 0;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 0;
@@ -767,19 +767,37 @@ body::before {
 .coordinators {
   list-style: none;
   padding: 0;
-  margin: 0;
+  margin: 0 auto;
+  max-width: 72rem;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
   gap: 0;
   border-top: 1px solid var(--rule);
 }
 .coordinators li {
-  padding: clamp(1.5rem, 2.5vw, 2rem) clamp(1rem, 2vw, 1.5rem);
+  padding: clamp(2rem, 3vw, 2.5rem) clamp(1rem, 2vw, 1.5rem);
   border-bottom: 1px solid var(--rule);
   border-right: 1px solid var(--rule);
+  text-align: center;
 }
 .coordinators li:last-child,
 .coordinators li:nth-last-child(1) { border-right: 1px solid var(--rule); }
+.coordinators img {
+  display: block;
+  width: clamp(5.5rem, 8vw, 7rem);
+  height: clamp(5.5rem, 8vw, 7rem);
+  margin: 0 auto 1.25rem;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid var(--rule);
+  filter: grayscale(0.18) sepia(0.08);
+  transition: transform 0.45s ease, filter 0.45s ease, border-color 0.45s ease;
+}
+.coordinators li:hover img {
+  transform: scale(1.04);
+  filter: grayscale(0) sepia(0);
+  border-color: var(--accent);
+}
 .coordinators h3 {
   margin: 0 0 0.4rem;
   font-family: var(--serif);
