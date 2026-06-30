@@ -29,6 +29,17 @@ flag any proposal that would violate them.
 When in doubt, prefer the simpler, more self-contained, more privacy-preserving
 option.
 
+## Project structure notes
+
+- **`index.html`** is the actual website (the page users browse). WCAG and other
+  web-facing rules apply here.
+- **`kit.html`** is *not* a browsable page — it is only the source used to
+  generate the workshop toolkit PDF (`desirable-futures-kit.pdf`, via
+  `build-pdf.sh`). Treat it as a print artifact: keep its visual identity in sync
+  with the site, but web-only accessibility patterns (skip links, focus
+  indicators, keyboard nav) do not apply. After editing `kit.html`, the PDF must
+  be regenerated.
+
 ## Commit hygiene
 
 - **Small, atomic commits.** Each commit should represent one logical change and
