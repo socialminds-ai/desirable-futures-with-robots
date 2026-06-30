@@ -11,7 +11,7 @@ A single-page editorial site introducing the *Desirable Futures with Robots* wor
 index.html                     # The landing page.
 styles.css                     # All landing-page styling. Editorial / manifesto.
 script.js                      # Sticky-header state + scroll reveal. No deps.
-kit.html                       # Six-page workshop kit (source of the PDF).
+kit.html                       # Nine-page workshop kit (source of the PDF).
 build-pdf.sh                   # Regenerates desirable-futures-kit.pdf from kit.html.
 desirable-futures-kit.pdf      # The kit, ready to print or share.
 assets/                        # Hero illustration, favicons, map, coordinator photos.
@@ -19,16 +19,21 @@ assets/                        # Hero illustration, favicons, map, coordinator p
 
 ## The workshop kit
 
-`kit.html` is a print-ready, six-page A4 document that bundles everything a researcher needs to run a workshop. Each `<div class="page">` renders as one PDF page. It matches the site's visual identity — cream / ink / terracotta, Fraunces serif — but on a white field for ink economy.
+`kit.html` is a print-ready, nine-page A4 document that bundles everything a researcher needs to run a workshop. Each `<div class="page">` renders as one PDF page. It matches the site's visual identity — cream / ink / terracotta, Fraunces serif — but on a white field for ink economy.
 
 Pages:
 
 1. **Cover** — title, hero illustration, version, license.
 2. **Rationale** — the three-section argument (laboratory→industry / dominant framing / reclaiming the narrative) plus the featured question.
-3. **Reversing the narrative** — the *what if* bank: four starting prompts plus three blank slots for the researcher to add their own.
+3. **Reversing the narratives** — the *what if* bank: four starting prompts plus three blank slots for the researcher to add their own.
 4. **Translating for your audience** — short notes for children, adolescents, older adults, and workers (warehouse/care/service).
-5. **Workshop formats** — role-play (recommended), drawing, brainstorming, interviews. Each with structure and what to capture.
+5. **Workshop formats** — role-play (recommended), thing interviews, drawing, speculative fictions, scene-building, brainstorming, interviews. Each with structure and what to capture.
 6. **Workshop report form** — one fillable A4 page per *Desirable Future* the workshop produces.
+7. **Participant information sheet** *(template)* — what the workshop is, what is recorded, and how data is used and protected.
+8. **Participant consent form** *(template)* — initialled statements, an optional image-sharing choice, and an optional minors / guardian authorisation panel.
+9. **Data management plan** *(template)* — what is collected, lawful basis, storage, sharing, retention, and rights, GDPR-aligned.
+
+Pages 7–9 are GDPR-oriented **templates**: every adaptable field is marked in terracotta italic (e.g. `[institution]`). The data policy baked in: raw recordings are never shared; only anonymised, consolidated results and the open-access corpus of co-created imaginaries are; participant photos / short video excerpts only with explicit consent.
 
 ### Regenerating the PDF
 

@@ -796,6 +796,124 @@
       letter-spacing: 0.02em;
       white-space: nowrap;
     }
+    /* ============================================================
+       PAGES 6–8 — ETHICS TEMPLATES (information sheet / consent / DMP)
+       Shared, fillable building blocks. Terracotta italic = adapt-me.
+       ============================================================ */
+    .tpl-note {
+      font-family: var(--sans);
+      font-size: 6.7pt;
+      letter-spacing: 0.03em;
+      line-height: 1.4;
+      color: var(--ink-soft);
+      background: var(--cream-soft);
+      border-left: 0.6mm solid var(--accent);
+      padding: 2mm 3mm;
+      margin: 0 0 4.5mm;
+    }
+    .tpl-note strong { color: var(--ink); font-weight: 600; }
+    .fillable { color: var(--accent); font-style: italic; }
+    .eth-title {
+      font-family: var(--serif);
+      font-size: 19pt;
+      font-weight: 300;
+      letter-spacing: -0.02em;
+      line-height: 1;
+      margin: 0 0 1.5mm;
+      font-variation-settings: "opsz" 96, "SOFT" 40;
+    }
+    .eth-projline {
+      font-family: var(--sans);
+      font-size: 7pt;
+      letter-spacing: 0.05em;
+      color: var(--ink-soft);
+      margin: 0 0 4mm;
+      line-height: 1.5;
+    }
+    .eth-section { margin: 0 0 3mm; }
+    .eth-section > h3 {
+      font-family: var(--sans);
+      font-size: 7pt;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin: 0 0 1mm;
+    }
+    .eth-section p {
+      font-size: 8.5pt;
+      line-height: 1.4;
+      margin: 0 0 1.5mm;
+      color: var(--ink);
+    }
+    .eth-section p:last-child { margin-bottom: 0; }
+    .eth-section em { font-style: italic; }
+    .eth-section strong { font-weight: 600; }
+
+    /* consent statements with initial boxes */
+    .consent-list {
+      list-style: none; padding: 0; margin: 0 0 3.5mm;
+      display: grid; gap: 2mm;
+    }
+    .consent-list > li {
+      display: grid; grid-template-columns: 8mm 1fr; gap: 3mm; align-items: stretch;
+    }
+    .consent-list .box {
+      border: 0.3mm solid var(--ink-faint); min-height: 6.5mm;
+    }
+    .consent-list p { font-size: 8.3pt; line-height: 1.32; margin: 0; align-self: center; }
+    .consent-list em { font-style: italic; }
+    .consent-list strong { font-weight: 600; }
+
+    /* optional yes/no choices */
+    .consent-choice {
+      display: grid; grid-template-columns: 1fr auto; gap: 5mm; align-items: center;
+      padding: 2.5mm 0; border-top: 0.25mm solid var(--rule);
+    }
+    .consent-choice:last-of-type { border-bottom: 0.25mm solid var(--rule); margin-bottom: 3.5mm; }
+    .consent-choice p { font-size: 8.3pt; line-height: 1.32; margin: 0; }
+    .yesno { display: flex; gap: 5mm; }
+    .yesno span {
+      display: inline-flex; align-items: center; gap: 1.5mm;
+      font-family: var(--sans); font-size: 6.7pt; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--ink-soft);
+    }
+    .yesno .tick { width: 3.8mm; height: 3.8mm; border: 0.3mm solid var(--ink-faint); }
+
+    /* signature rows */
+    .sign-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm 7mm; margin-top: 1mm; }
+    .sign-cell { display: grid; gap: 1.2mm; }
+    .sign-cell__label {
+      font-family: var(--sans); font-size: 6.3pt; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--ink-soft);
+    }
+    .sign-cell__rule { height: 7mm; border-bottom: 0.3mm solid var(--ink); }
+
+    /* minor / parental sub-panel */
+    .eth-subpanel {
+      margin-top: 4mm; padding: 4mm; border: 0.3mm solid var(--rule);
+      background: var(--cream-soft);
+    }
+    .eth-subpanel > h3 {
+      font-family: var(--serif); font-style: italic; font-size: 10pt;
+      color: var(--accent); margin: 0 0 2mm;
+      font-variation-settings: "opsz" 48, "SOFT" 80;
+    }
+    .eth-subpanel p { font-size: 8pt; line-height: 1.38; margin: 0 0 2.5mm; }
+
+    /* data management plan rows */
+    .dmp { display: grid; gap: 0; border-top: 0.3mm solid var(--accent); }
+    .dmp__row {
+      display: grid; grid-template-columns: 38mm 1fr; gap: 5mm;
+      padding: 2.8mm 0; border-bottom: 0.25mm solid var(--rule);
+    }
+    .dmp__key {
+      font-family: var(--sans); font-size: 6.5pt; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--accent); padding-top: 0.4mm;
+    }
+    .dmp__val { font-size: 8.5pt; line-height: 1.4; color: var(--ink); }
+    .dmp__val em { font-style: italic; }
+    .dmp__val strong { font-weight: 600; }
+    .dmp__val .fillable { font-style: italic; color: var(--accent); }
   </style>
 </head>
 <body>
@@ -853,7 +971,7 @@
     <div class="page-header__wordmark">Desirable Futures<em>&nbsp;with robots</em></div>
     <div class="page-header__right">
       <span class="page-header__section">Rationale</span>
-      <span>Page 1 / 5 · Kit v1.0</span>
+      <span>Page 1 / 8 · Kit v1.0</span>
     </div>
   </header>
 
@@ -933,7 +1051,7 @@
     <div class="page-header__wordmark">Desirable Futures<em>&nbsp;with robots</em></div>
     <div class="page-header__right">
       <span class="page-header__section">Reversing the narratives</span>
-      <span>Page 2 / 5 · Kit v1.0</span>
+      <span>Page 2 / 8 · Kit v1.0</span>
     </div>
   </header>
 
@@ -1002,7 +1120,7 @@
     <div class="page-header__wordmark">Desirable Futures<em>&nbsp;with robots</em></div>
     <div class="page-header__right">
       <span class="page-header__section">Translating for your audience</span>
-      <span>Page 3 / 5 · Kit v1.0</span>
+      <span>Page 3 / 8 · Kit v1.0</span>
     </div>
   </header>
 
@@ -1108,7 +1226,7 @@
     <div class="page-header__wordmark">Desirable Futures<em>&nbsp;with robots</em></div>
     <div class="page-header__right">
       <span class="page-header__section">Workshop formats</span>
-      <span>Page 4 / 5 · Kit v1.0</span>
+      <span>Page 4 / 8 · Kit v1.0</span>
     </div>
   </header>
 
@@ -1261,7 +1379,7 @@
   <header class="header">
     <div class="header__left">
       <div class="wordmark">Desirable Futures<em>&nbsp;with robots</em></div>
-      <div class="header__sub">Workshop report form · One desirable future per page · Kit page 5 / 5</div>
+      <div class="header__sub">Workshop report form · One desirable future per page · Kit page 5 / 8</div>
     </div>
     <div class="header__right">
       <div class="report-no">Report
@@ -1359,6 +1477,190 @@
       <strong>CC BY-SA 4.0</strong><br />
       desirable-futures-with-robots.org · One page, one future
     </div>
+  </footer>
+
+</div>
+
+
+<!-- ============================================================
+     PAGE 7 — PARTICIPANT INFORMATION SHEET (template)
+     ============================================================ -->
+<div class="page page--content">
+
+  <header class="page-header">
+    <div class="page-header__wordmark">Desirable Futures<em>&nbsp;with robots</em></div>
+    <div class="page-header__right">
+      <span class="page-header__section">Information sheet · template</span>
+      <span>Page 6 / 8 · Kit v1.0</span>
+    </div>
+  </header>
+
+  <div class="page-body">
+
+    <p class="tpl-note">
+      <strong>Template — adapt before use.</strong> Replace every <span class="fillable">[bracketed]</span> field with your own details, and align this sheet with your institution's ethics process and local law. A starting point, not legal advice.
+    </p>
+
+    <h2 class="eth-title">Participant Information Sheet</h2>
+    <p class="eth-projline">
+      <strong>Desirable Futures with Robots</strong> — a distributed workshop series · Workshop: <span class="fillable">[title / location]</span> · Facilitator: <span class="fillable">[name]</span>, <span class="fillable">[institution]</span> · Contact: <span class="fillable">[email]</span>
+    </p>
+
+    <div class="eth-section">
+      <h3>What is this?</h3>
+      <p>You are invited to take part in a short creative workshop imagining <em>desirable futures with robots</em> — the kinds of robots, if any, that people would actually want in their lives. We collect the ideas, stories, and images produced. Taking part is entirely your choice.</p>
+    </div>
+
+    <div class="eth-section">
+      <h3>What will happen?</h3>
+      <p>The session lasts about <span class="fillable">[duration]</span>. You will take part in a <span class="fillable">[role-play / drawing / interview / scene-building / …]</span> activity. With your consent, it may be <strong>audio- and/or video-recorded</strong>, and <strong>photographs</strong> may be taken of the activity and of any drawings or objects produced.</p>
+    </div>
+
+    <div class="eth-section">
+      <h3>Do I have to take part?</h3>
+      <p>No. Participation is voluntary. You may decline any question or activity, take a break, or stop at any time — without giving a reason and without consequence. You may withdraw your data up until <span class="fillable">[the point at which it is anonymised — e.g. the end of the session]</span>, after which it can no longer be identified and removed.</p>
+    </div>
+
+    <div class="eth-section">
+      <h3>How is my data used and protected?</h3>
+      <p>Recordings, photographs, and notes are seen only by the workshop team and held securely (<span class="fillable">[where / how]</span>), under the lawful basis of your <strong>consent</strong>. <strong>Raw recordings are never shared or published.</strong> Only <strong>anonymised, consolidated results</strong> — themes, summaries, aggregated insights — are shared.</p>
+      <p>The <em>imaginaries</em> you help create — drawings, written pieces, scene photographs, and report forms — become, once anonymised, part of a shared <strong>corpus of co-created imaginaries</strong> released under an <strong>open-access licence</strong> (<span class="fillable">[e.g. CC BY-SA 4.0]</span>), so others can read, learn from, and build on them.</p>
+      <p>Separately, and <em>only if you give explicit consent</em>, anonymised <strong>photographs or short video excerpts</strong> may appear in reports, talks, publications, and online. You can take part fully without agreeing to this.</p>
+    </div>
+
+    <div class="eth-section">
+      <h3>Your rights</h3>
+      <p>You may ask to access, correct, or erase your data, or withdraw your consent, by contacting <span class="fillable">[facilitator / data controller]</span>. Data is retained until <span class="fillable">[retention period]</span>, then deleted. Full detail is on the Data Management Plan (page 8).</p>
+    </div>
+
+    <div class="eth-section">
+      <h3>Questions or concerns</h3>
+      <p>Contact the facilitator at <span class="fillable">[email]</span>. If you have concerns about how this workshop was run, contact <span class="fillable">[local ethics committee / data protection officer]</span>.</p>
+    </div>
+
+  </div>
+
+  <footer class="page-footer">
+    <div><strong>Keep this sheet.</strong> A copy is yours to take away.</div>
+    <div class="page-footer__center">Plant a seed.</div>
+    <div class="page-footer__right"><strong>CC BY-SA 4.0</strong> · desirable-futures-with-robots.org</div>
+  </footer>
+
+</div>
+
+
+<!-- ============================================================
+     PAGE 8 — PARTICIPANT CONSENT FORM (template)
+     ============================================================ -->
+<div class="page page--content">
+
+  <header class="page-header">
+    <div class="page-header__wordmark">Desirable Futures<em>&nbsp;with robots</em></div>
+    <div class="page-header__right">
+      <span class="page-header__section">Consent form · template</span>
+      <span>Page 7 / 8 · Kit v1.0</span>
+    </div>
+  </header>
+
+  <div class="page-body">
+
+    <p class="tpl-note">
+      <strong>Template — adapt before use.</strong> Pair this with the information sheet (page 6). The minors / guardian panel is optional — keep it only for workshops with participants under <span class="fillable">[18]</span>.
+    </p>
+
+    <h2 class="eth-title">Participant Consent Form</h2>
+    <p class="eth-projline">
+      <strong>Desirable Futures with Robots</strong> · Workshop: <span class="fillable">[title / location]</span> · Date: <span class="fillable">[date]</span>
+    </p>
+
+    <div class="eth-section"><h3>Please initial each box</h3></div>
+    <ul class="consent-list">
+      <li><span class="box"></span><p>I have read and understood the information sheet and have had the chance to ask questions.</p></li>
+      <li><span class="box"></span><p>I understand my participation is voluntary and that I may withdraw at any time, without giving a reason, up until my data is anonymised.</p></li>
+      <li><span class="box"></span><p>I agree to take part in the workshop activity.</p></li>
+      <li><span class="box"></span><p>I understand the session may be <strong>audio- and/or video-recorded</strong>, and that <strong>photographs</strong> may be taken.</p></li>
+      <li><span class="box"></span><p>I understand that <strong>raw recordings will not be shared</strong>, and that only <strong>anonymised, consolidated results</strong> will be published.</p></li>
+      <li><span class="box"></span><p>I agree that the anonymised <strong>imaginaries</strong> I help create (drawings, writings, scene photos, report forms) may be shared in an <strong>open-access corpus</strong>.</p></li>
+    </ul>
+
+    <div class="eth-section"><h3>Optional — sharing of images (tick your choice)</h3></div>
+    <div class="consent-choice">
+      <p>I agree that <strong>anonymised photographs or short video excerpts</strong> of me may be used in publications, presentations, and online.</p>
+      <div class="yesno"><span><span class="tick"></span>Yes</span><span><span class="tick"></span>No</span></div>
+    </div>
+
+    <div class="sign-grid">
+      <div class="sign-cell"><span class="sign-cell__label">Name (block capitals)</span><span class="sign-cell__rule"></span></div>
+      <div class="sign-cell"><span class="sign-cell__label">Signature</span><span class="sign-cell__rule"></span></div>
+      <div class="sign-cell"><span class="sign-cell__label">Date</span><span class="sign-cell__rule"></span></div>
+      <div class="sign-cell"><span class="sign-cell__label">Facilitator name &amp; signature</span><span class="sign-cell__rule"></span></div>
+    </div>
+
+    <div class="eth-subpanel">
+      <h3>For participants under <span class="fillable">[18]</span> — parental / guardian authorisation</h3>
+      <p>The activity and this form have been explained to the child in terms they can understand, and they are happy to take part. A parent or legal guardian must co-sign below.</p>
+      <div class="sign-grid">
+        <div class="sign-cell"><span class="sign-cell__label">Child's name</span><span class="sign-cell__rule"></span></div>
+        <div class="sign-cell"><span class="sign-cell__label">Parent / guardian name</span><span class="sign-cell__rule"></span></div>
+        <div class="sign-cell"><span class="sign-cell__label">Parent / guardian signature</span><span class="sign-cell__rule"></span></div>
+        <div class="sign-cell"><span class="sign-cell__label">Date</span><span class="sign-cell__rule"></span></div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer class="page-footer">
+    <div><strong>One copy</strong> for the participant, one for the facilitator.</div>
+    <div class="page-footer__center">Freely given, freely withdrawn.</div>
+    <div class="page-footer__right"><strong>CC BY-SA 4.0</strong> · desirable-futures-with-robots.org</div>
+  </footer>
+
+</div>
+
+
+<!-- ============================================================
+     PAGE 9 — DATA MANAGEMENT PLAN (template)
+     ============================================================ -->
+<div class="page page--content">
+
+  <header class="page-header">
+    <div class="page-header__wordmark">Desirable Futures<em>&nbsp;with robots</em></div>
+    <div class="page-header__right">
+      <span class="page-header__section">Data management plan · template</span>
+      <span>Page 8 / 8 · Kit v1.0</span>
+    </div>
+  </header>
+
+  <div class="page-body">
+
+    <p class="tpl-note">
+      <strong>Template — adapt before use.</strong> Complete one plan per workshop (or per series, if your set-up is identical). Fill every <span class="fillable">[bracketed]</span> field and check it against your institution's policy and the GDPR — or your local equivalent.
+    </p>
+
+    <h2 class="eth-title">Data Management Plan</h2>
+    <p class="eth-projline">
+      <strong>Desirable Futures with Robots</strong> · Workshop: <span class="fillable">[title / location]</span> · Facilitator: <span class="fillable">[name / institution]</span>
+    </p>
+
+    <div class="dmp">
+      <div class="dmp__row"><div class="dmp__key">Data collected</div><div class="dmp__val">Varies by methodology, but typically: <strong>audio recordings</strong>, <strong>video recordings</strong>, <strong>photographs</strong>, participant drawings or built artefacts, written notes, and completed report forms. <span class="fillable">[adjust to your activity]</span></div></div>
+      <div class="dmp__row"><div class="dmp__key">Personal data</div><div class="dmp__val">Faces and voices in recordings; names and signatures on consent forms; anything personal a participant chooses to disclose. No special-category data is sought. <span class="fillable">[note any exceptions]</span></div></div>
+      <div class="dmp__row"><div class="dmp__key">Lawful basis</div><div class="dmp__val">Participant <strong>consent</strong> — and parental / guardian consent for minors — freely given and withdrawable.</div></div>
+      <div class="dmp__row"><div class="dmp__key">Controller</div><div class="dmp__val"><span class="fillable">[institution / data controller]</span> · Contact / DPO: <span class="fillable">[name, email]</span></div></div>
+      <div class="dmp__row"><div class="dmp__key">Storage &amp; security</div><div class="dmp__val">Held on <span class="fillable">[encrypted institutional storage]</span>; access limited to the named workshop team. Consent forms stored separately from recordings.</div></div>
+      <div class="dmp__row"><div class="dmp__key">Sharing</div><div class="dmp__val"><strong>Raw data (audio / video / un-blurred images) is not shared.</strong> Only <strong>anonymised, consolidated results</strong> are shared. Where a participant has explicitly consented, anonymised <strong>photographs or short video excerpts</strong> may be shared.</div></div>
+      <div class="dmp__row"><div class="dmp__key">Open-access corpus</div><div class="dmp__val">The final corpus of <strong>anonymised co-created imaginaries</strong> (drawings, writings, scene photographs, report forms) is published under an <strong>open-access licence</strong> (<span class="fillable">[e.g. CC BY-SA 4.0]</span>) for reuse.</div></div>
+      <div class="dmp__row"><div class="dmp__key">Anonymisation</div><div class="dmp__val">Names replaced with codes; identifying details removed; faces blurred unless image-sharing consent was given. <span class="fillable">[method]</span></div></div>
+      <div class="dmp__row"><div class="dmp__key">Retention</div><div class="dmp__val">Raw data kept until <span class="fillable">[date / period]</span>, then securely deleted. Anonymised, consolidated results may be retained indefinitely.</div></div>
+      <div class="dmp__row"><div class="dmp__key">Participant rights</div><div class="dmp__val">Access, rectification, erasure, and withdrawal of consent — by contacting the controller above, up until anonymisation.</div></div>
+    </div>
+
+  </div>
+
+  <footer class="page-footer">
+    <div><strong>Minimise. Protect. Anonymise.</strong></div>
+    <div class="page-footer__center">Only the harvest travels.</div>
+    <div class="page-footer__right"><strong>CC BY-SA 4.0</strong> · desirable-futures-with-robots.org</div>
   </footer>
 
 </div>
