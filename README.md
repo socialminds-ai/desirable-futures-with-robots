@@ -2,6 +2,9 @@
 
 A single-page editorial site introducing the *Desirable Futures with Robots* workshop series to the HRI research community. Static HTML/CSS/JS, designed to be served from GitHub Pages with no build step.
 
+**Live:** <https://desirable-futures-with-robots.org>
+**Repository:** <https://github.com/socialminds-ai/desirable-futures-with-robots>
+
 ## Files
 
 ```
@@ -55,17 +58,14 @@ Then open <http://localhost:8000>.
 
 ## Deploying to GitHub Pages
 
-1. Create a new repo (e.g. `desirable-futures`).
-2. Push these files to the `main` branch.
-3. **Settings → Pages → Build and deployment → Source: Deploy from a branch → `main` / `(root)`.**
-4. The site will be served at `https://<your-org>.github.io/desirable-futures/`.
-5. For a custom domain: add a `CNAME` file containing the domain (e.g. `desirable-futures.org`) and configure the DNS `CNAME` record to point at `<your-org>.github.io`.
+1. Push these files to the `main` branch of `socialminds-ai/desirable-futures-with-robots`.
+2. **Settings → Pages → Build and deployment → Source: Deploy from a branch → `main` / `(root)`.**
+3. The site will be served at `https://socialminds-ai.github.io/desirable-futures-with-robots/`.
+4. For the custom domain: add a `CNAME` file containing `desirable-futures-with-robots.org` and configure the DNS `CNAME` record to point at `socialminds-ai.github.io`.
 
 ## Things to replace before going live
 
-1. **Email**: `contact@desirable-futures.org` appears in `index.html` and `kit.html`. Replace.
-2. **Repository link**: in the Join section and footer (`github.com/<your-org>/desirable-futures`).
-3. **Placeholders** (see below).
+1. **Placeholders** (see below).
 
 ## Placeholders to commission
 
