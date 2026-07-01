@@ -73,6 +73,10 @@ $h = static fn ($v): string => htmlspecialchars((string) $v, ENT_QUOTES);
 <body>
 <header class="admin-header">
   <span class="admin-header__mark">Desirable Futures <em>· admin</em></span>
+  <nav class="admin-nav">
+    <a href="index.php" class="is-active">Facilitators</a>
+    <a href="whatifs.php">What-ifs</a>
+  </nav>
   <span class="admin-header__who">
     <?= $h($me['name']) ?>
     <a class="btn btn--ghost" href="../index.php">Return to website</a>
