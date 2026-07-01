@@ -170,9 +170,13 @@ Each phase leaves the tree working; small atomic commits within.
 - Consent checkbox dropped — registering is the agreement (consent still
   recorded); form theming + CSS cache-busting; login-aware nav with a user
   dropdown, plus **Sign in** alongside **Join** for signed-out visitors.
-- **Admin panel** (early slice of Phase 3): `public/admin/` with password login
-  (`admins` table, `db/create_admin.php` CLI) — lists facilitators and deletes
-  them. What-ifs moderation still arrives with the rest of Phase 3.
+- **Admin panel** (early slice of Phase 3): `public/admin/` lists facilitators
+  and can delete them, and **promote/revoke admins**. Admin is a role
+  (`facilitators.is_admin`) — no separate password login; admins sign in by
+  email/magic link like any facilitator and get an "Admin panel" link in the
+  nav dropdown. Bootstrap the first admin with `php db/set_admin.php <email>`;
+  self-revoke/self-delete are blocked to avoid lockout. What-ifs moderation
+  still arrives with the rest of Phase 3.
 
 ### Carried into later phases
 
