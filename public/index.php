@@ -13,6 +13,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon-180.png" />
   <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="assets/leaflet/leaflet.css" />
 </head>
 <body>
 
@@ -186,8 +187,9 @@
         <p>shared reporting format, so results compare, aggregate, and accumulate into something larger than any single workshop.</p>
       </div>
 
-      <div class="series-map" aria-hidden="true">
-        <img src="assets/map.svg" alt="" />
+      <div class="series-map">
+        <div id="facilitator-map" class="facilitator-map" role="img" aria-label="World map showing where participating facilitators are based"></div>
+        <noscript><img src="assets/map.svg" alt="A stylised world map." /></noscript>
         </div>
       </div>
 
@@ -377,7 +379,7 @@
     </p>
 
     <div class="join__actions">
-      <a class="btn btn--primary" href="mailto:severin.lemaignan@iiia.csic.es?subject=Joining%20as%20researcher">
+      <a class="btn btn--primary" href="register.php">
         <span>Join as researcher</span>
         <span class="arrow" aria-hidden="true">→</span>
       </a>
@@ -409,6 +411,32 @@
   </div>
 </footer>
 
+<script src="assets/leaflet/leaflet.js"></script>
+<script>
+(function () {
+  var el = document.getElementById('facilitator-map');
+  if (!el || !window.L) return;
+  var map = L.map('facilitator-map', { scrollWheelZoom: false, worldCopyJump: true })
+    .setView([25, 5], 1);
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 12, attribution: '&copy; OpenStreetMap contributors'
+  }).addTo(map);
+  fetch('api/facilitators.php').then(function (r) { return r.json(); }).then(function (pts) {
+    pts.forEach(function (p) {
+      var m = L.circleMarker([p.lat, p.lng], {
+        radius: 6, color: '#B2431F', weight: 1,
+        fillColor: '#B2431F', fillOpacity: 0.75
+      });
+      if (p.name) {
+        m.bindPopup(p.institution
+          ? (p.name + '<br>' + p.institution)
+          : p.name);
+      }
+      m.addTo(map);
+    });
+  }).catch(function () {});
+})();
+</script>
 <script src="script.js"></script>
 </body>
 </html>
