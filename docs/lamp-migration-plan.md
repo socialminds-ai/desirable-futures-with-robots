@@ -152,11 +152,21 @@ Each phase leaves the tree working; small atomic commits within.
   move web files into `public/`; `index.html` → `index.php`, visually identical;
   repoint what-if links to a `/what-ifs` stub; update `kit.html` asset paths +
   `build-pdf.sh` output path.
-- **Phase 2 — Facilitator registration + email auth + map.**
+- **Phase 2 — Facilitator registration + email auth + map. _(done)_**
+  Double opt-in registration, single-use magic-link login, self-service
+  account + erasure, Leaflet picker, and the live pin map + JSON API.
 - **Phase 3 — What-ifs page** (list + propose + vote + post-hoc moderation) and
   admin moderation area.
 - **Phase 4 — GDPR + a11y polish** (privacy policy incl. OSM note, retention
   cron, erasure flow, WCAG pass on new forms + map picker).
+
+### Carried into later phases
+
+- **Rate-limiting** on register/login (honeypot is in place; server-side
+  throttling belongs with the Phase 4 abuse/GDPR pass).
+- **Production mail**: the SMTP client is auth/TLS-free (fine for dev Mailpit
+  and localhost MTA); an authenticated/TLS relay is a deploy-phase task.
+- **Admin moderation area** arrives with Phase 3.
 
 ## Untouched by this migration
 
