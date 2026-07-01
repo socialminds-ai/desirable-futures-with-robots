@@ -75,6 +75,7 @@ $h = static fn ($v): string => htmlspecialchars((string) $v, ENT_QUOTES);
   <span class="admin-header__mark">Desirable Futures <em>· admin</em></span>
   <span class="admin-header__who">
     <?= $h($me['name']) ?>
+    <a class="btn btn--ghost" href="../index.php">Return to website</a>
     <form method="post" action="../logout.php" class="inline-form">
       <?= csrf_field() ?>
       <button type="submit" class="btn btn--ghost">Sign out</button>
