@@ -1,1 +1,13 @@
+# Maintainer credential notes — never commit
 secrets
+
+# App DB credentials for production hosts (env vars used in dev)
+/config/secrets.php
+
+# Future user uploads — kept out of git
+/uploads/
+
+# OS / editor cruft
+.DS_Store
+*.swp
+*~
