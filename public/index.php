@@ -236,7 +236,7 @@
       </li>
       <li class="whatif whatif--open">
         <span class="whatif__num">+</span>
-        <p class="whatif__text">A growing bank, contributed by researchers and participants. Have one? <a href="#join">Send it →</a></p>
+        <p class="whatif__text">A growing bank, contributed by researchers and participants. Have one? <a href="what-ifs.php">Send it →</a></p>
       </li>
     </ol>
   </section>
@@ -382,7 +382,7 @@
         <span class="arrow" aria-hidden="true">→</span>
       </a>
       <a class="btn btn--ghost" href="desirable-futures-kit.pdf">Download the kit (PDF)</a>
-      <a class="btn btn--ghost" href="mailto:severin.lemaignan@iiia.csic.es?subject=Proposing%20a%20what%20if">Propose a <em>what if</em></a>
+      <a class="btn btn--ghost" href="what-ifs.php">Propose a <em>what if</em></a>
     </div>
 
     <div class="join__contact">

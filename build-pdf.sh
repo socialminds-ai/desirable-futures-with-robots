@@ -18,7 +18,7 @@ fi
   --hide-scrollbars \
   --no-pdf-header-footer \
   --virtual-time-budget=15000 \
-  --print-to-pdf="desirable-futures-kit.pdf" \
+  --print-to-pdf="public/desirable-futures-kit.pdf" \
   "file://$PWD/kit.html"
 
-echo "→ desirable-futures-kit.pdf  ($(du -h desirable-futures-kit.pdf | cut -f1))"
+echo "→ public/desirable-futures-kit.pdf  ($(du -h public/desirable-futures-kit.pdf | cut -f1))"
