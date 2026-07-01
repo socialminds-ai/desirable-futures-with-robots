@@ -1,0 +1,58 @@
+<?php
+declare(strict_types=1);
+
+/** Trimmed string within [min,max] chars, or null if invalid/empty. */
+function v_string($v, int $max, int $min = 0): ?string
+{
+    if (!is_string($v)) {
+        return null;
+    }
+    $v = trim($v);
+    $len = mb_strlen($v);
+    if ($len < max($min, 1) || $len > $max) {
+        return null;
+    }
+    return $v;
+}
+
+/** Normalised, valid email (lowercased) or null. */
+function v_email($v): ?string
+{
+    if (!is_string($v)) {
+        return null;
+    }
+    $v = trim($v);
+    if ($v === '' || mb_strlen($v) > 320) {
+        return null;
+    }
+    $email = filter_var($v, FILTER_VALIDATE_EMAIL);
+    return $email === false ? null : strtolower($email);
+}
+
+/** Latitude rounded to city-level (~1 km) or null. */
+function v_lat($v): ?float
+{
+    if ($v === '' || $v === null || !is_numeric($v)) {
+        return null;
+    }
+    $f = (float) $v;
+    return ($f < -90 || $f > 90) ? null : round($f, 2);
+}
+
+/** Longitude rounded to city-level (~1 km) or null. */
+function v_lng($v): ?float
+{
+    if ($v === '' || $v === null || !is_numeric($v)) {
+        return null;
+    }
+    $f = (float) $v;
+    return ($f < -180 || $f > 180) ? null : round($f, 2);
+}
+
+/** One of the seven continents, or null. */
+function v_continent($v): ?string
+{
+    $allowed = ['Africa', 'Asia', 'Europe', 'North America',
+                'South America', 'Oceania', 'Antarctica'];
+    return (is_string($v) && in_array($v, $allowed, true)) ? $v : null;
+}
