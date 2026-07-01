@@ -25,7 +25,7 @@ function render_site_nav(?array $user, string $home = ''): string
     }
 
     $name = htmlspecialchars((string) $user['name'], ENT_QUOTES);
-    $adminLink = is_admin($user) ? '<a href="admin/index.php">Admin</a>' : '';
+    $adminLink = is_admin($user) ? '<a href="admin/index.php">Admin panel</a>' : '';
     $menu =
         '<details class="user-menu">'
       . '<summary>' . $name . ' <span class="user-menu__caret" aria-hidden="true">&#9662;</span></summary>'
