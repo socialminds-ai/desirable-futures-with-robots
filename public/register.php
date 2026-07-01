@@ -162,7 +162,7 @@ require dirname(__DIR__) . '/templates/header.php';
 
       <fieldset class="form-fieldset">
         <legend>Where are you based?</legend>
-        <p class="form-hint">Enter your city and country and we'll drop a pin — click or drag the map to fine-tune. Stored at city level (~1&nbsp;km).</p>
+        <p class="form-hint">Enter your city and country and we'll drop a pin — click or drag the map to fine-tune. Stored at city level (~1&nbsp;km). City suggestions from <a href="https://www.geonames.org/">GeoNames</a>.</p>
 
         <div class="form-row form-row--split">
           <span>

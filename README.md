@@ -128,6 +128,13 @@ Both are plain HTML in `index.html`:
 
 Add or remove `<li>` blocks. The CSS handles layout automatically.
 
+## Data credits
+
+- City geocoding uses the [GeoNames](https://www.geonames.org/) `cities15000`
+  dataset (© GeoNames, CC BY 4.0), bundled trimmed at `db/seeds/cities15000.tsv`
+  and loaded into the `cities` table via `php db/seed_cities.php`.
+- Map tiles © [OpenStreetMap](https://www.openstreetmap.org/copyright) contributors.
+
 ## License
 
 Content and code: CC BY-SA 4.0 unless noted otherwise.
