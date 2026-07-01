@@ -1305,6 +1305,14 @@ body::before {
 .btn--outline:hover { border-color: var(--accent); color: var(--ink); }
 
 .admin-header__who { display: flex; align-items: center; gap: 0.9rem; font-family: var(--sans); font-size: 0.9rem; color: var(--ink-soft); }
+.admin-header .btn--ghost {
+  color: var(--ink-soft);
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  font-style: normal;
+  padding: 0.45rem 0.9rem;
+}
+.admin-header .btn--ghost:hover { color: var(--ink); border-color: var(--accent); background: var(--cream); }
 .admin-you { color: var(--ink-faint); font-size: 0.8rem; }
 .admin-table td .inline-form { display: inline-block; margin: 0 0 0.2rem; }
 
