@@ -1406,6 +1406,51 @@ body::before {
 .whatif-propose .form-hint { text-align: center; }
 
 .whatif-signin { text-align: center; font-family: var(--sans); color: var(--ink-soft); margin-top: 2rem; }
+
+.whatif__owner {
+  margin-top: 0.85rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  font-family: var(--sans);
+  font-size: 0.8rem;
+}
+.whatif__owner .inline-form { margin: 0; }
+.whatif__owner a,
+.linkbtn {
+  color: var(--ink-faint);
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  text-decoration: underline;
+}
+.whatif__owner a:hover,
+.linkbtn:hover { color: var(--accent); }
+
+.whatif-edit { max-width: 34rem; margin: 0.25rem auto 0; }
+.whatif-edit textarea {
+  width: 100%;
+  padding: 0.7rem 0.85rem;
+  font-family: var(--sans);
+  font-size: 1rem;
+  color: var(--ink);
+  background: #FBF7EA;
+  border: 1.5px solid var(--rule);
+  border-radius: 4px;
+  resize: vertical;
+}
+.whatif-edit textarea:focus { border-color: var(--accent); outline: 2px solid var(--accent); outline-offset: 2px; }
+.whatif-edit__actions { display: flex; gap: 0.9rem; align-items: center; justify-content: center; margin-top: 0.6rem; }
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0);
+  white-space: nowrap; border: 0;
+}
 .admin-you { color: var(--ink-faint); font-size: 0.8rem; }
 .admin-table td .inline-form { display: inline-block; margin: 0 0 0.2rem; }
 
