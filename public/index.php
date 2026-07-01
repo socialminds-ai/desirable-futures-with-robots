@@ -1,3 +1,8 @@
+<?php
+require_once __DIR__ . '/../lib/view.php';
+$navUser = optional_facilitator();
+$cssVer  = (string) @filemtime(__DIR__ . '/styles.css');
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -12,7 +17,7 @@
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon-180.png" />
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css?v=<?= htmlspecialchars($cssVer, ENT_QUOTES) ?>" />
   <link rel="stylesheet" href="assets/leaflet/leaflet.css" />
 </head>
 <body>
@@ -23,12 +28,7 @@
   <a class="wordmark" href="#top">
     <span>Desirable Futures</span><em>&nbsp;with robots</em>
   </a>
-  <nav class="site-nav">
-    <a href="#proposition">Manifesto</a>
-    <a href="#series">Series</a>
-    <a href="#coordinators">Coordinators</a>
-    <a class="cta" href="#join">Join&nbsp;→</a>
-  </nav>
+  <?= render_site_nav($navUser, '') ?>
 </header>
 
 <main id="top" tabindex="-1">

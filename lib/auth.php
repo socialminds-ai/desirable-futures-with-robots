@@ -73,6 +73,19 @@ function current_facilitator(): ?array
     return $stmt->fetch() ?: null;
 }
 
+/**
+ * Like current_facilitator(), but never *starts* a session: if the visitor has
+ * no session cookie they're anonymous, so we avoid setting one (keeps the
+ * landing page cookie-free for logged-out visitors). Use for nav/chrome.
+ */
+function optional_facilitator(): ?array
+{
+    if (empty($_COOKIE[DF_SESSION_NAME])) {
+        return null;
+    }
+    return current_facilitator();
+}
+
 /** Require an active session; redirect to login otherwise. */
 function require_login(): array
 {

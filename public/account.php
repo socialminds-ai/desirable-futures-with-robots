@@ -108,7 +108,7 @@ require dirname(__DIR__) . '/templates/header.php';
         <label for="location_label">Location label</label>
         <input type="text" id="location_label" name="location_label" maxlength="200" placeholder="e.g. Barcelona, Spain" value="<?= $e('location_label') ?>" />
       </p>
-      <div id="map-picker" class="map-picker" aria-hidden="true"></div>
+      <div id="map-picker" class="map-picker" aria-hidden="true" style="height:340px"></div>
       <p class="form-hint" id="coord-readout" aria-live="polite">
         <?php if ($f['lat'] !== null && $f['lng'] !== null): ?>Selected: <?= $e('lat') ?>, <?= $e('lng') ?><?php else: ?>No pin placed.<?php endif; ?>
         <button type="button" id="clear-pin" class="btn-inline">Clear pin</button>

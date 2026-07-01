@@ -37,7 +37,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $lng         = v_lng($_POST['lng'] ?? '');
         $showMap     = isset($_POST['show_on_map']) ? 1 : 0;
         $showId      = isset($_POST['show_identity']) ? 1 : 0;
-        $consent     = isset($_POST['consent']);
 
         $old = [
             'name' => (string) ($_POST['name'] ?? ''),
@@ -52,7 +51,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if ($name === null)   $errors[] = 'Please enter your name.';
         if ($email === null)  $errors[] = 'Please enter a valid email address.';
-        if (!$consent)        $errors[] = 'Please confirm you agree to how your data is used.';
         if ($continentIn !== '' && $continent === null) $errors[] = 'Please choose a valid continent.';
         // Coordinates only count as a pair.
         if (($lat === null) !== ($lng === null)) {
@@ -194,7 +192,7 @@ require dirname(__DIR__) . '/templates/header.php';
           <input type="text" id="location_label" name="location_label" maxlength="200" placeholder="e.g. Barcelona, Spain" value="<?= $e('location_label') ?>" />
         </p>
 
-        <div id="map-picker" class="map-picker" aria-hidden="true"></div>
+        <div id="map-picker" class="map-picker" aria-hidden="true" style="height:340px"></div>
         <p class="form-hint" id="coord-readout" aria-live="polite">
           <?php if ($old['lat'] !== '' && $old['lng'] !== ''): ?>
             Selected: <?= $e('lat') ?>, <?= $e('lng') ?>
@@ -214,20 +212,16 @@ require dirname(__DIR__) . '/templates/header.php';
         </p>
       </fieldset>
 
-      <p class="form-check form-check--consent">
-        <label><input type="checkbox" name="consent" value="1" required />
-          I agree that my details may be stored and used to coordinate the workshop series,
-          and understand I can request access or deletion at any time. <span class="req">*</span></label>
-      </p>
-      <p class="form-hint">
-        We store only what you enter here, keep no third-party trackers, and never share raw
-        contact details. See how data is handled in the workshop kit.
-      </p>
-
-      <!-- honeypot: must stay empty -->
-      <div class="hp" aria-hidden="true">
-        <label>Leave this field empty<input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
+      <!-- anti-spam honeypot: hidden from people, must stay empty -->
+      <div class="hp" aria-hidden="true" style="position:absolute!important;left:-9999px!important;width:1px;height:1px;overflow:hidden;">
+        <label>Do not fill this in<input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
       </div>
+
+      <p class="form-consent">
+        By registering, you agree that the details above are stored and used to coordinate the
+        workshop series. We set no third-party trackers and never share your raw contact details,
+        and you can view or delete your data at any time from your account.
+      </p>
 
       <p class="form-actions">
         <button type="submit" class="btn btn--primary"><span>Register</span><span class="arrow" aria-hidden="true">→</span></button>

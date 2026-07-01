@@ -1,11 +1,14 @@
 <?php
 /**
  * Shared page chrome. Set $page_title / $page_desc / $page_head before include.
- * Not used by index.php (kept byte-stable) — for the auth/account pages.
+ * Used by the auth/account/what-ifs pages (index.php has its own <head>).
  */
+require_once dirname(__DIR__) . '/lib/view.php';
 $page_title = $page_title ?? 'Desirable Futures with robots';
 $page_desc  = $page_desc  ?? '';
 $page_head  = $page_head  ?? '';
+$navUser    = $navUser    ?? optional_facilitator();
+$cssVer     = (string) @filemtime(dirname(__DIR__) . '/public/styles.css');
 ?>
 <!doctype html>
 <html lang="en">
@@ -19,7 +22,7 @@ $page_head  = $page_head  ?? '';
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon-180.png" />
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css?v=<?= htmlspecialchars($cssVer, ENT_QUOTES) ?>" />
   <?= $page_head ?>
 </head>
 <body>
@@ -30,12 +33,7 @@ $page_head  = $page_head  ?? '';
   <a class="wordmark" href="index.php">
     <span>Desirable Futures</span><em>&nbsp;with robots</em>
   </a>
-  <nav class="site-nav">
-    <a href="index.php#proposition">Manifesto</a>
-    <a href="index.php#series">Series</a>
-    <a href="index.php#coordinators">Coordinators</a>
-    <a class="cta" href="index.php#join">Join&nbsp;→</a>
-  </nav>
+  <?= render_site_nav($navUser, 'index.php') ?>
 </header>
 
 <main id="top" tabindex="-1">
