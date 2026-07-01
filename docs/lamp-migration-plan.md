@@ -160,13 +160,27 @@ Each phase leaves the tree working; small atomic commits within.
 - **Phase 4 — GDPR + a11y polish** (privacy policy incl. OSM note, retention
   cron, erasure flow, WCAG pass on new forms + map picker).
 
+**Post-Phase-2 refinements (done):**
+
+- Location is now structured **city + country** (dropped `continent` /
+  `location_label`). City is free text with **autocomplete** and **offline
+  geocoding** (bundled GeoNames `cities15000`, `api/geocode.php` +
+  `api/cities.php`) that auto-places the map pin; smaller places fall back to a
+  manual pin. Deploy step: run `php db/seed_cities.php` after migrations.
+- Consent checkbox dropped — registering is the agreement (consent still
+  recorded); form theming + CSS cache-busting; login-aware nav with a user
+  dropdown, plus **Sign in** alongside **Join** for signed-out visitors.
+- **Admin panel** (early slice of Phase 3): `public/admin/` with password login
+  (`admins` table, `db/create_admin.php` CLI) — lists facilitators and deletes
+  them. What-ifs moderation still arrives with the rest of Phase 3.
+
 ### Carried into later phases
 
-- **Rate-limiting** on register/login (honeypot is in place; server-side
-  throttling belongs with the Phase 4 abuse/GDPR pass).
+- **Rate-limiting** on register/login/admin-login (honeypots + a small admin
+  failure delay are in place; real throttling belongs with the Phase 4 pass).
 - **Production mail**: the SMTP client is auth/TLS-free (fine for dev Mailpit
   and localhost MTA); an authenticated/TLS relay is a deploy-phase task.
-- **Admin moderation area** arrives with Phase 3.
+- **What-ifs moderation** joins the admin panel in Phase 3.
 
 ## Untouched by this migration
 
