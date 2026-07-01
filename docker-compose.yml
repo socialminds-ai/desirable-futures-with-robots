@@ -1,0 +1,33 @@
+# Local development stack only — NOT used in production.
+# Mirrors the target LAMP host (Apache + PHP + MariaDB) so the vanilla app runs
+# unchanged when deployed. Bring up with:  docker compose up --build
+# Then open http://localhost:8080  (phpMyAdmin-style access via the db port).
+services:
+  web:
+    build: ./docker/php
+    ports:
+      - "8080:80"
+    volumes:
+      - ./:/var/www/html
+    environment:
+      DB_HOST: db
+      DB_NAME: desirabl
+      DB_USER: desirabl
+      DB_PASS: devpassword
+    depends_on:
+      - db
+
+  db:
+    image: mariadb:11
+    environment:
+      MARIADB_DATABASE: desirabl
+      MARIADB_USER: desirabl
+      MARIADB_PASSWORD: devpassword
+      MARIADB_ROOT_PASSWORD: devroot
+    volumes:
+      - dbdata:/var/lib/mysql
+    ports:
+      - "3307:3306"
+
+volumes:
+  dbdata:
