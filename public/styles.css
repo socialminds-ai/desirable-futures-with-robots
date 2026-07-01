@@ -1054,3 +1054,132 @@ body::before {
   background: var(--accent);
   color: var(--cream);
 }
+
+
+/* =============================================================
+   FORMS & ACCOUNT  (registration, sign-in, account)
+   ============================================================= */
+
+.section--form { min-height: 60vh; }
+
+.form,
+.form-errors,
+.form-notice { max-width: var(--prose-w); margin-inline: auto; }
+
+.form { font-family: var(--sans); margin-top: 2rem; }
+.form-row { margin: 0 0 1.25rem; }
+.form-row label,
+.form-row--split label { display: block; margin-bottom: 0.4rem; color: var(--ink-soft); font-size: 0.95rem; }
+
+.form-row input,
+.form-row select {
+  width: 100%;
+  padding: 0.7rem 0.8rem;
+  font-family: var(--sans);
+  font-size: 1rem;
+  color: var(--ink);
+  background: var(--cream-soft);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+}
+.form-row input:focus,
+.form-row select:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+  border-color: var(--accent);
+}
+.form-row--split { display: flex; gap: 1rem; flex-wrap: wrap; }
+.form-row--split > span { flex: 1 1 12rem; }
+
+.req { color: var(--accent); }
+
+.form-fieldset {
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 1.25rem;
+  margin: 0 0 1.5rem;
+}
+.form-fieldset legend { padding: 0 0.5rem; font-family: var(--serif); font-style: italic; color: var(--accent); }
+
+.form-hint {
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  color: var(--ink-faint);
+  margin: 0.4rem 0 1rem;
+}
+
+.form-check { margin: 0.6rem 0; font-family: var(--sans); font-size: 0.95rem; }
+.form-check label { display: flex; gap: 0.6rem; align-items: baseline; cursor: pointer; }
+.form-check input { margin-top: 0.15rem; flex: none; }
+.form-check--consent { margin: 1.5rem 0 0.5rem; font-size: 1rem; }
+
+.form-actions { margin-top: 1.75rem; }
+
+.form-errors,
+.form-notice {
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  padding: 1rem 1.25rem;
+  border-radius: 4px;
+  margin: 1.5rem auto;
+}
+.form-errors { background: var(--accent-soft); color: var(--accent-deep); border: 1px solid var(--accent); }
+.form-errors ul { margin: 0.3rem 0 0; padding-left: 1.2rem; }
+.form-notice { background: var(--cream-deep); color: var(--ink-soft); border: 1px solid var(--rule); }
+
+/* honeypot — off-screen, kept in the DOM for bots */
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+/* map picker (forms) & display map (landing) */
+.map-picker {
+  height: 320px;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  margin: 0.5rem 0;
+}
+.facilitator-map {
+  width: 100%;
+  aspect-ratio: 16 / 7;
+  border-radius: 4px;
+}
+.leaflet-container { background: var(--cream-soft); font-family: var(--sans); }
+
+.btn-inline {
+  font-family: var(--sans);
+  font-size: 0.8rem;
+  background: none;
+  border: none;
+  color: var(--accent);
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 0;
+  margin-left: 0.5rem;
+}
+
+/* account secondary actions (light background) */
+.account-secondary {
+  max-width: var(--prose-w);
+  margin: 2.5rem auto 0;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+  border-top: 1px solid var(--rule);
+  padding-top: 1.5rem;
+}
+.inline-form { margin: 0; }
+.account-secondary .btn { padding: 0.6rem 1.1rem; font-size: 0.95rem; }
+.account-secondary .btn--ghost {
+  color: var(--ink-soft);
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  font-style: normal;
+}
+.account-secondary .btn--ghost:hover { color: var(--ink); border-color: var(--accent); background: var(--cream-soft); }
+.btn--danger {
+  background: transparent;
+  color: var(--accent-deep);
+  border: 1px solid var(--accent);
+  border-radius: 2px;
+}
+.btn--danger:hover { background: var(--accent); color: var(--cream); }
