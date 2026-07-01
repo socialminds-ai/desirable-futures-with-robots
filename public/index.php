@@ -416,21 +416,21 @@ $cssVer  = (string) @filemtime(__DIR__ . '/styles.css');
 (function () {
   var el = document.getElementById('facilitator-map');
   if (!el || !window.L) return;
-  var map = L.map('facilitator-map', { scrollWheelZoom: false, worldCopyJump: true })
-    .setView([25, 5], 1);
+  var map = L.map('facilitator-map', { scrollWheelZoom: false, minZoom: 2, maxZoom: 8 })
+    .setView([30, 5], 2);
   L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 12, attribution: '&copy; OpenStreetMap contributors'
+    maxZoom: 12, noWrap: true, attribution: '&copy; OpenStreetMap contributors'
   }).addTo(map);
   fetch('api/facilitators.php').then(function (r) { return r.json(); }).then(function (pts) {
     pts.forEach(function (p) {
       var m = L.circleMarker([p.lat, p.lng], {
-        radius: 6, color: '#B2431F', weight: 1,
-        fillColor: '#B2431F', fillOpacity: 0.75
+        radius: 7, color: '#ffffff', weight: 1.5,
+        fillColor: '#B2431F', fillOpacity: 0.9
       });
       if (p.name) {
         m.bindPopup(p.institution
-          ? (p.name + '<br>' + p.institution)
-          : p.name);
+          ? ('<strong>' + p.name + '</strong><br>' + p.institution)
+          : ('<strong>' + p.name + '</strong>'));
       }
       m.addTo(map);
     });
