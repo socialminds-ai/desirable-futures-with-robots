@@ -49,10 +49,16 @@ function v_lng($v): ?float
     return ($f < -180 || $f > 180) ? null : round($f, 2);
 }
 
-/** One of the seven continents, or null. */
-function v_continent($v): ?string
+/** A known country name (from lib/countries.php), or null. */
+function v_country($v): ?string
 {
-    $allowed = ['Africa', 'Asia', 'Europe', 'North America',
-                'South America', 'Oceania', 'Antarctica'];
-    return (is_string($v) && in_array($v, $allowed, true)) ? $v : null;
+    if (!is_string($v)) {
+        return null;
+    }
+    $v = trim($v);
+    if ($v === '') {
+        return null;
+    }
+    require_once __DIR__ . '/countries.php';
+    return in_array($v, df_countries(), true) ? $v : null;
 }

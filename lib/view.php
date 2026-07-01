@@ -20,6 +20,7 @@ function render_site_nav(?array $user, string $home = ''): string
 
     if ($user === null) {
         return '<nav class="site-nav">' . $links
+             . '<a class="site-nav__signin" href="login.php">Sign in</a>'
              . '<a class="cta" href="' . $home . '#join">Join&nbsp;&rarr;</a></nav>';
     }
 

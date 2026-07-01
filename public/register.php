@@ -6,6 +6,7 @@ require_once __DIR__ . '/../lib/auth.php';
 require_once __DIR__ . '/../lib/csrf.php';
 require_once __DIR__ . '/../lib/validate.php';
 require_once __DIR__ . '/../lib/mail.php';
+require_once __DIR__ . '/../lib/countries.php';
 
 df_session(); // start the session before any output so CSRF persists on GET
 
@@ -14,8 +15,8 @@ $errors = [];
 $done   = false;
 
 $old = [
-    'name' => '', 'email' => '', 'institution' => '', 'country' => '',
-    'continent' => '', 'location_label' => '', 'lat' => '', 'lng' => '',
+    'name' => '', 'email' => '', 'institution' => '', 'city' => '',
+    'country' => '', 'lat' => '', 'lng' => '',
     'show_on_map' => true, 'show_identity' => false,
 ];
 
@@ -29,10 +30,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $name        = v_string($_POST['name'] ?? '', 200, 1);
         $email       = v_email($_POST['email'] ?? '');
         $institution = v_string($_POST['institution'] ?? '', 200);
-        $country     = v_string($_POST['country'] ?? '', 100);
-        $continentIn = trim((string) ($_POST['continent'] ?? ''));
-        $continent   = $continentIn === '' ? null : v_continent($continentIn);
-        $label       = v_string($_POST['location_label'] ?? '', 200);
+        $city        = v_string($_POST['city'] ?? '', 120);
+        $country     = v_country($_POST['country'] ?? '');   // null if blank/invalid
         $lat         = v_lat($_POST['lat'] ?? '');
         $lng         = v_lng($_POST['lng'] ?? '');
         $showMap     = isset($_POST['show_on_map']) ? 1 : 0;
@@ -42,16 +41,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'name' => (string) ($_POST['name'] ?? ''),
             'email' => (string) ($_POST['email'] ?? ''),
             'institution' => (string) ($_POST['institution'] ?? ''),
-            'country' => (string) ($_POST['country'] ?? ''),
-            'continent' => $continentIn,
-            'location_label' => (string) ($_POST['location_label'] ?? ''),
+            'city' => (string) ($_POST['city'] ?? ''),
+            'country' => $country ?? '',
             'lat' => $lat ?? '', 'lng' => $lng ?? '',
             'show_on_map' => $showMap === 1, 'show_identity' => $showId === 1,
         ];
 
         if ($name === null)   $errors[] = 'Please enter your name.';
         if ($email === null)  $errors[] = 'Please enter a valid email address.';
-        if ($continentIn !== '' && $continent === null) $errors[] = 'Please choose a valid continent.';
         // Coordinates only count as a pair.
         if (($lat === null) !== ($lng === null)) {
             $lat = $lng = null;
@@ -78,20 +75,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if ($existing) {
                     $fid = (int) $existing['id'];
                     $pdo->prepare(
-                        'UPDATE facilitators SET name=?, institution=?, country=?, continent=?,
-                         lat=?, lng=?, location_label=?, show_on_map=?, show_identity=?,
+                        'UPDATE facilitators SET name=?, institution=?, city=?, country=?,
+                         lat=?, lng=?, show_on_map=?, show_identity=?,
                          consent_at=NOW(), consent_version=? WHERE id=?'
-                    )->execute([$name, $institution, $country, $continent, $lat, $lng,
-                        $label, $showMap, $showId, $cfg['consent_version'], $fid]);
+                    )->execute([$name, $institution, $city, $country, $lat, $lng,
+                        $showMap, $showId, $cfg['consent_version'], $fid]);
                 } else {
                     $pdo->prepare(
                         'INSERT INTO facilitators
-                         (name, email, institution, country, continent, lat, lng,
-                          location_label, show_on_map, show_identity, status,
-                          consent_at, consent_version)
-                         VALUES (?,?,?,?,?,?,?,?,?,?,"pending",NOW(),?)'
-                    )->execute([$name, $email, $institution, $country, $continent, $lat,
-                        $lng, $label, $showMap, $showId, $cfg['consent_version']]);
+                         (name, email, institution, city, country, lat, lng,
+                          show_on_map, show_identity, status, consent_at, consent_version)
+                         VALUES (?,?,?,?,?,?,?,?,?,"pending",NOW(),?)'
+                    )->execute([$name, $email, $institution, $city, $country, $lat,
+                        $lng, $showMap, $showId, $cfg['consent_version']]);
                     $fid = (int) $pdo->lastInsertId();
                 }
 
@@ -134,7 +130,7 @@ require dirname(__DIR__) . '/templates/header.php';
     <h1 class="section__title">Run a workshop.</h1>
     <div class="prose prose--narrow">
       <p>Register as a facilitator. We'll email you a confirmation link — no password
-        to remember. You can mark where you're based to appear on the map.</p>
+        to remember. Tell us your city and you'll appear on the map.</p>
     </div>
 
     <?php if ($errors): ?>
@@ -164,33 +160,27 @@ require dirname(__DIR__) . '/templates/header.php';
         <input type="text" id="institution" name="institution" maxlength="200" value="<?= $e('institution') ?>" autocomplete="organization" />
       </p>
 
-      <div class="form-row form-row--split">
-        <span>
-          <label for="country">Country</label>
-          <input type="text" id="country" name="country" maxlength="100" value="<?= $e('country') ?>" autocomplete="country-name" />
-        </span>
-        <span>
-          <label for="continent">Continent</label>
-          <select id="continent" name="continent">
-            <?php
-            $continents = ['', 'Africa', 'Asia', 'Europe', 'North America', 'South America', 'Oceania', 'Antarctica'];
-            foreach ($continents as $c):
-                $sel = ($old['continent'] === $c) ? ' selected' : '';
-            ?>
-              <option value="<?= htmlspecialchars($c, ENT_QUOTES) ?>"<?= $sel ?>><?= $c === '' ? '—' : htmlspecialchars($c) ?></option>
-            <?php endforeach; ?>
-          </select>
-        </span>
-      </div>
-
       <fieldset class="form-fieldset">
         <legend>Where are you based?</legend>
-        <p class="form-hint">Optional. Click the map to drop a pin (stored at city level, ~1&nbsp;km). Or just type your location below.</p>
+        <p class="form-hint">Enter your city and country and we'll drop a pin — click or drag the map to fine-tune. Stored at city level (~1&nbsp;km).</p>
 
-        <p class="form-row">
-          <label for="location_label">Location label</label>
-          <input type="text" id="location_label" name="location_label" maxlength="200" placeholder="e.g. Barcelona, Spain" value="<?= $e('location_label') ?>" />
-        </p>
+        <div class="form-row form-row--split">
+          <span>
+            <label for="city">City</label>
+            <input type="text" id="city" name="city" maxlength="120" value="<?= $e('city') ?>" autocomplete="address-level2" list="city-list" />
+            <datalist id="city-list"></datalist>
+          </span>
+          <span>
+            <label for="country">Country</label>
+            <select id="country" name="country">
+              <option value="">—</option>
+              <?php foreach (df_countries() as $c):
+                $sel = ($old['country'] === $c) ? ' selected' : ''; ?>
+                <option value="<?= htmlspecialchars($c, ENT_QUOTES) ?>"<?= $sel ?>><?= htmlspecialchars($c) ?></option>
+              <?php endforeach; ?>
+            </select>
+          </span>
+        </div>
 
         <div id="map-picker" class="map-picker" aria-hidden="true" style="height:340px"></div>
         <p class="form-hint" id="coord-readout" aria-live="polite">
@@ -240,6 +230,7 @@ $page_scripts = <<<'HTML'
   var el = document.getElementById('map-picker');
   el.removeAttribute('aria-hidden');
   var latEl = document.getElementById('lat'), lngEl = document.getElementById('lng');
+  var cityEl = document.getElementById('city'), countryEl = document.getElementById('country');
   var readout = document.getElementById('coord-readout');
   var map = L.map('map-picker').setView([20, 0], 1);
   L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -247,10 +238,11 @@ $page_scripts = <<<'HTML'
   }).addTo(map);
   var marker = null;
   function round2(n) { return Math.round(n * 100) / 100; }
-  function place(lat, lng) {
+  function place(lat, lng, zoom) {
     latEl.value = lat; lngEl.value = lng;
     if (marker) marker.setLatLng([lat, lng]); else marker = L.marker([lat, lng]).addTo(map);
     readout.firstChild.nodeValue = 'Selected: ' + lat + ', ' + lng + ' ';
+    if (zoom) map.setView([lat, lng], zoom);
   }
   if (latEl.value && lngEl.value) { place(+latEl.value, +lngEl.value); map.setView([+latEl.value, +lngEl.value], 6); }
   map.on('click', function (e) { place(round2(e.latlng.lat), round2(e.latlng.lng)); });
@@ -258,6 +250,33 @@ $page_scripts = <<<'HTML'
     latEl.value = ''; lngEl.value = '';
     if (marker) { map.removeLayer(marker); marker = null; }
     readout.firstChild.nodeValue = 'No pin placed. ';
+  });
+  // Auto-place the pin from city + country via first-party geocoding.
+  function geocode() {
+    var city = cityEl.value.trim(), country = countryEl.value;
+    if (!city || !country) return;
+    fetch('api/geocode.php?city=' + encodeURIComponent(city) + '&country=' + encodeURIComponent(country))
+      .then(function (r) { return r.json(); })
+      .then(function (d) { if (d && typeof d.lat === 'number') place(round2(d.lat), round2(d.lng), 10); })
+      .catch(function () {});
+  }
+  cityEl.addEventListener('change', geocode);
+  countryEl.addEventListener('change', geocode);
+  // City-name autocomplete (suggestions only — any city name is accepted).
+  var dataList = document.getElementById('city-list');
+  var acTimer;
+  cityEl.addEventListener('input', function () {
+    clearTimeout(acTimer);
+    var q = cityEl.value.trim(), country = countryEl.value;
+    if (!dataList || !country || q.length < 2) return;
+    acTimer = setTimeout(function () {
+      fetch('api/cities.php?country=' + encodeURIComponent(country) + '&q=' + encodeURIComponent(q))
+        .then(function (r) { return r.json(); })
+        .then(function (list) {
+          dataList.innerHTML = '';
+          list.forEach(function (n) { var o = document.createElement('option'); o.value = n; dataList.appendChild(o); });
+        }).catch(function () {});
+    }, 220);
   });
 })();
 </script>

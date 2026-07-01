@@ -5,6 +5,7 @@ require_once __DIR__ . '/../lib/db.php';
 require_once __DIR__ . '/../lib/auth.php';
 require_once __DIR__ . '/../lib/csrf.php';
 require_once __DIR__ . '/../lib/validate.php';
+require_once __DIR__ . '/../lib/countries.php';
 
 $f       = require_login();
 $notice  = [];
@@ -21,27 +22,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } elseif (($_POST['action'] ?? '') === 'update') {
         $name        = v_string($_POST['name'] ?? '', 200, 1);
         $institution = v_string($_POST['institution'] ?? '', 200);
-        $country     = v_string($_POST['country'] ?? '', 100);
-        $continentIn = trim((string) ($_POST['continent'] ?? ''));
-        $continent   = $continentIn === '' ? null : v_continent($continentIn);
-        $label       = v_string($_POST['location_label'] ?? '', 200);
+        $city        = v_string($_POST['city'] ?? '', 120);
+        $country     = v_country($_POST['country'] ?? '');
         $lat         = v_lat($_POST['lat'] ?? '');
         $lng         = v_lng($_POST['lng'] ?? '');
         $showMap     = isset($_POST['show_on_map']) ? 1 : 0;
         $showId      = isset($_POST['show_identity']) ? 1 : 0;
 
         if ($name === null)  $errors[] = 'Please enter your name.';
-        if ($continentIn !== '' && $continent === null) $errors[] = 'Please choose a valid continent.';
         if (($lat === null) !== ($lng === null)) { $lat = $lng = null; }
 
         if (!$errors) {
             db()->prepare(
-                'UPDATE facilitators SET name=?, institution=?, country=?, continent=?,
-                 lat=?, lng=?, location_label=?, show_on_map=?, show_identity=? WHERE id=?'
-            )->execute([$name, $institution, $country, $continent, $lat, $lng, $label,
+                'UPDATE facilitators SET name=?, institution=?, city=?, country=?,
+                 lat=?, lng=?, show_on_map=?, show_identity=? WHERE id=?'
+            )->execute([$name, $institution, $city, $country, $lat, $lng,
                 $showMap, $showId, (int) $f['id']]);
             $notice[] = 'Your details were updated.';
-            // Refresh in-memory copy.
             $stmt = db()->prepare('SELECT * FROM facilitators WHERE id = ?');
             $stmt->execute([(int) $f['id']]);
             $f = $stmt->fetch();
@@ -85,29 +82,29 @@ require dirname(__DIR__) . '/templates/header.php';
       <label for="institution">Institution</label>
       <input type="text" id="institution" name="institution" maxlength="200" value="<?= $e('institution') ?>" autocomplete="organization" />
     </p>
-    <div class="form-row form-row--split">
-      <span>
-        <label for="country">Country</label>
-        <input type="text" id="country" name="country" maxlength="100" value="<?= $e('country') ?>" autocomplete="country-name" />
-      </span>
-      <span>
-        <label for="continent">Continent</label>
-        <select id="continent" name="continent">
-          <?php foreach (['', 'Africa', 'Asia', 'Europe', 'North America', 'South America', 'Oceania', 'Antarctica'] as $c):
-            $sel = ((string) ($f['continent'] ?? '') === $c) ? ' selected' : ''; ?>
-            <option value="<?= htmlspecialchars($c, ENT_QUOTES) ?>"<?= $sel ?>><?= $c === '' ? '—' : htmlspecialchars($c) ?></option>
-          <?php endforeach; ?>
-        </select>
-      </span>
-    </div>
 
     <fieldset class="form-fieldset">
       <legend>Where are you based?</legend>
-      <p class="form-hint">Click the map to move your pin (stored at city level, ~1&nbsp;km).</p>
-      <p class="form-row">
-        <label for="location_label">Location label</label>
-        <input type="text" id="location_label" name="location_label" maxlength="200" placeholder="e.g. Barcelona, Spain" value="<?= $e('location_label') ?>" />
-      </p>
+      <p class="form-hint">Update your city and country to move the pin, or click the map (stored at city level, ~1&nbsp;km).</p>
+
+      <div class="form-row form-row--split">
+        <span>
+          <label for="city">City</label>
+          <input type="text" id="city" name="city" maxlength="120" value="<?= $e('city') ?>" autocomplete="address-level2" list="city-list" />
+          <datalist id="city-list"></datalist>
+        </span>
+        <span>
+          <label for="country">Country</label>
+          <select id="country" name="country">
+            <option value="">—</option>
+            <?php foreach (df_countries() as $c):
+              $sel = ((string) ($f['country'] ?? '') === $c) ? ' selected' : ''; ?>
+              <option value="<?= htmlspecialchars($c, ENT_QUOTES) ?>"<?= $sel ?>><?= htmlspecialchars($c) ?></option>
+            <?php endforeach; ?>
+          </select>
+        </span>
+      </div>
+
       <div id="map-picker" class="map-picker" aria-hidden="true" style="height:340px"></div>
       <p class="form-hint" id="coord-readout" aria-live="polite">
         <?php if ($f['lat'] !== null && $f['lng'] !== null): ?>Selected: <?= $e('lat') ?>, <?= $e('lng') ?><?php else: ?>No pin placed.<?php endif; ?>
@@ -154,6 +151,7 @@ $page_scripts = <<<'HTML'
   L.Icon.Default.imagePath = 'assets/leaflet/images/';
   var el = document.getElementById('map-picker'); el.removeAttribute('aria-hidden');
   var latEl = document.getElementById('lat'), lngEl = document.getElementById('lng');
+  var cityEl = document.getElementById('city'), countryEl = document.getElementById('country');
   var readout = document.getElementById('coord-readout');
   var map = L.map('map-picker').setView([20, 0], 1);
   L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -161,10 +159,11 @@ $page_scripts = <<<'HTML'
   }).addTo(map);
   var marker = null;
   function round2(n) { return Math.round(n * 100) / 100; }
-  function place(lat, lng) {
+  function place(lat, lng, zoom) {
     latEl.value = lat; lngEl.value = lng;
     if (marker) marker.setLatLng([lat, lng]); else marker = L.marker([lat, lng]).addTo(map);
     readout.firstChild.nodeValue = 'Selected: ' + lat + ', ' + lng + ' ';
+    if (zoom) map.setView([lat, lng], zoom);
   }
   if (latEl.value && lngEl.value) { place(+latEl.value, +lngEl.value); map.setView([+latEl.value, +lngEl.value], 6); }
   map.on('click', function (e) { place(round2(e.latlng.lat), round2(e.latlng.lng)); });
@@ -172,6 +171,32 @@ $page_scripts = <<<'HTML'
     latEl.value = ''; lngEl.value = '';
     if (marker) { map.removeLayer(marker); marker = null; }
     readout.firstChild.nodeValue = 'No pin placed. ';
+  });
+  function geocode() {
+    var city = cityEl.value.trim(), country = countryEl.value;
+    if (!city || !country) return;
+    fetch('api/geocode.php?city=' + encodeURIComponent(city) + '&country=' + encodeURIComponent(country))
+      .then(function (r) { return r.json(); })
+      .then(function (d) { if (d && typeof d.lat === 'number') place(round2(d.lat), round2(d.lng), 10); })
+      .catch(function () {});
+  }
+  cityEl.addEventListener('change', geocode);
+  countryEl.addEventListener('change', geocode);
+  // City-name autocomplete (suggestions only — any city name is accepted).
+  var dataList = document.getElementById('city-list');
+  var acTimer;
+  cityEl.addEventListener('input', function () {
+    clearTimeout(acTimer);
+    var q = cityEl.value.trim(), country = countryEl.value;
+    if (!dataList || !country || q.length < 2) return;
+    acTimer = setTimeout(function () {
+      fetch('api/cities.php?country=' + encodeURIComponent(country) + '&q=' + encodeURIComponent(q))
+        .then(function (r) { return r.json(); })
+        .then(function (list) {
+          dataList.innerHTML = '';
+          list.forEach(function (n) { var o = document.createElement('option'); o.value = n; dataList.appendChild(o); });
+        }).catch(function () {});
+    }, 220);
   });
 })();
 </script>

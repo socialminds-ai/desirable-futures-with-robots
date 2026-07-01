@@ -219,7 +219,7 @@ body::before {
 }
 .site-nav .cta:hover { color: var(--accent-deep); }
 @media (max-width: 640px) {
-  .site-nav a:not(.cta) { display: none; }
+  .site-nav a:not(.cta):not(.site-nav__signin) { display: none; }
 }
 
 
