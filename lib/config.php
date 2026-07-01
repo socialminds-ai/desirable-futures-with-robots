@@ -31,6 +31,14 @@ function df_config(): array
             'pass'    => $val('DB_PASS', ''),
             'charset' => 'utf8mb4',
         ],
+        'mail' => [
+            'host' => $val('MAIL_HOST', 'localhost'),
+            'port' => (int) $val('MAIL_PORT', '25'),
+            'from' => $val('MAIL_FROM', 'no-reply@desirable-futures-with-robots.org'),
+            'from_name' => 'Desirable Futures with Robots',
+        ],
+        // Bump when the consent/privacy text changes; stored with each consent.
+        'consent_version' => '2026-07-01',
     ];
 
     return $config;

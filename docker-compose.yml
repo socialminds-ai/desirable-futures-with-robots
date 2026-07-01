@@ -14,8 +14,12 @@ services:
       DB_NAME: desirabl
       DB_USER: desirabl
       DB_PASS: devpassword
+      MAIL_HOST: mail
+      MAIL_PORT: "1025"
+      MAIL_FROM: "no-reply@desirable-futures-with-robots.org"
     depends_on:
       - db
+      - mail
 
   db:
     image: mariadb:11
@@ -28,6 +32,12 @@ services:
       - dbdata:/var/lib/mysql
     ports:
       - "3307:3306"
+
+  # Catches all outgoing mail in dev; web UI at http://localhost:8025
+  mail:
+    image: axllent/mailpit
+    ports:
+      - "8025:8025"
 
 volumes:
   dbdata:
