@@ -1298,8 +1298,15 @@ body::before {
 .badge { display: inline-block; padding: 0.12rem 0.55rem; border-radius: 999px; font-size: 0.72rem; font-weight: 600; }
 .badge--active { background: #D8ECD8; color: #1F5130; }
 .badge--pending { background: var(--accent-soft); color: var(--accent-deep); }
+.badge--admin { background: var(--ink); color: var(--cream); }
 
 .btn--small { padding: 0.4rem 0.8rem; font-size: 0.85rem; }
+.btn--outline { background: transparent; color: var(--ink-soft); border: 1px solid var(--rule); border-radius: 2px; }
+.btn--outline:hover { border-color: var(--accent); color: var(--ink); }
+
+.admin-header__who { display: flex; align-items: center; gap: 0.9rem; font-family: var(--sans); font-size: 0.9rem; color: var(--ink-soft); }
+.admin-you { color: var(--ink-faint); font-size: 0.8rem; }
+.admin-table td .inline-form { display: inline-block; margin: 0 0 0.2rem; }
 
 .admin-login { max-width: 22rem; margin: 4rem auto; }
 .admin-login .section__title { font-size: 1.75rem; margin-bottom: 1.5rem; }

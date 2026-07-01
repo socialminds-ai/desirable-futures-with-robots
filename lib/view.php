@@ -25,11 +25,13 @@ function render_site_nav(?array $user, string $home = ''): string
     }
 
     $name = htmlspecialchars((string) $user['name'], ENT_QUOTES);
+    $adminLink = is_admin($user) ? '<a href="admin/index.php">Admin</a>' : '';
     $menu =
         '<details class="user-menu">'
       . '<summary>' . $name . ' <span class="user-menu__caret" aria-hidden="true">&#9662;</span></summary>'
       . '<div class="user-menu__panel">'
       . '<a href="account.php">Edit details</a>'
+      . $adminLink
       . '<form method="post" action="logout.php">' . csrf_field()
       . '<button type="submit">Sign out</button></form>'
       . '</div></details>';

@@ -97,54 +97,30 @@ function require_login(): array
     return $f;
 }
 
-/* ---- Admin accounts (password-based) ------------------------------------ */
+/* ---- Admin role (a flag on facilitators) -------------------------------- */
 
-/** Verify admin credentials; return the admin id or null. */
-function admin_authenticate(string $username, string $password): ?int
+/** True when a facilitator row carries the admin role. */
+function is_admin(?array $facilitator): bool
 {
-    $stmt = db()->prepare('SELECT id, password_hash FROM admins WHERE username = ? LIMIT 1');
-    $stmt->execute([$username]);
-    $row = $stmt->fetch();
-    if (!$row || !password_verify($password, (string) $row['password_hash'])) {
-        return null;
-    }
-    return (int) $row['id'];
+    return $facilitator !== null && (int) ($facilitator['is_admin'] ?? 0) === 1;
 }
 
-function admin_login(int $adminId): void
-{
-    df_session();
-    session_regenerate_id(true);
-    $_SESSION['admin_id'] = $adminId;
-}
-
-function admin_logout(): void
-{
-    df_session();
-    unset($_SESSION['admin_id']);
-}
-
-/** The logged-in admin (id + username), or null. */
-function current_admin(): ?array
-{
-    df_session();
-    if (empty($_SESSION['admin_id'])) {
-        return null;
-    }
-    $stmt = db()->prepare('SELECT id, username FROM admins WHERE id = ? LIMIT 1');
-    $stmt->execute([(int) $_SESSION['admin_id']]);
-    return $stmt->fetch() ?: null;
-}
-
-/** Require an admin session; redirect to the admin login otherwise. */
+/**
+ * Require an admin: a logged-in facilitator with is_admin. Called from pages
+ * under /admin/, so redirects are relative to that directory.
+ */
 function require_admin(): array
 {
-    $a = current_admin();
-    if (!$a) {
-        header('Location: login.php');
+    $f = current_facilitator();
+    if (!$f) {
+        header('Location: ../login.php');   // not signed in
         exit;
     }
-    return $a;
+    if (!is_admin($f)) {
+        header('Location: ../index.php');    // signed in but not an admin
+        exit;
+    }
+    return $f;
 }
 
 /** Absolute origin (scheme + host) for building links in emails. */
