@@ -1,6 +1,6 @@
 # Desirable Futures with Robots — landing site
 
-A single-page editorial site introducing the *Desirable Futures with Robots* workshop series to the HRI research community. Static HTML/CSS/JS, designed to be served from GitHub Pages with no build step.
+An editorial site introducing the *Desirable Futures with Robots* workshop series to the HRI research community. Being migrated from a static page into a lightweight **LAMP** platform (Apache · MariaDB · PHP) — vanilla stack, no build step, minimal dependencies. See [`docs/lamp-migration-plan.md`](docs/lamp-migration-plan.md) for scope and sequencing.
 
 **Live:** <https://desirable-futures-with-robots.org>
 **Repository:** <https://github.com/socialminds-ai/desirable-futures-with-robots>
@@ -8,13 +8,19 @@ A single-page editorial site introducing the *Desirable Futures with Robots* wor
 ## Files
 
 ```
-index.html                     # The landing page.
-styles.css                     # All landing-page styling. Editorial / manifesto.
-script.js                      # Sticky-header state + scroll reveal. No deps.
+public/                        # Apache DocumentRoot — the only web-served dir.
+  index.php                    #   The landing page.
+  what-ifs.php                 #   The community what-if bank (stub for now).
+  styles.css                   #   All styling. Editorial / manifesto.
+  script.js                    #   Sticky-header state + scroll reveal. No deps.
+  assets/                      #   Hero, favicons, map, fonts, coordinator photos.
+  desirable-futures-kit.pdf    #   The kit, ready to print or share.
+lib/                           # PHP (config, PDO) — NOT web-served.
+db/                            # migrate.php runner + migrations/ (schema source of truth).
+config/                        # secrets.example.php (copy to secrets.php on the host).
+docker/  docker-compose.yml    # Local dev stack (Apache + PHP + MariaDB).
 kit.html                       # Nine-page workshop kit (source of the PDF).
-build-pdf.sh                   # Regenerates desirable-futures-kit.pdf from kit.html.
-desirable-futures-kit.pdf      # The kit, ready to print or share.
-assets/                        # Hero illustration, favicons, map, coordinator photos.
+build-pdf.sh                   # Regenerates public/desirable-futures-kit.pdf from kit.html.
 ```
 
 ## The workshop kit
@@ -47,26 +53,35 @@ This renders `kit.html` to `desirable-futures-kit.pdf` via headless Chrome. Requ
 
 You can also preview the kit live in a browser by visiting <http://localhost:8000/kit.html> after starting the local server (see below).
 
-## Local preview
+## Local development
 
-Any static server works. Two options:
+The site now needs PHP + MariaDB. A disposable docker stack mirrors the target
+LAMP host:
 
 ```bash
-# Python (no install)
-python3 -m http.server 8000
-
-# Or Node, if you have it
-npx serve .
+docker-compose up --build       # or `docker compose` on Compose v2
 ```
 
-Then open <http://localhost:8000>.
+Then open <http://localhost:8080>. Apply database migrations with:
 
-## Deploying to GitHub Pages
+```bash
+docker-compose exec web php db/migrate.php
+```
 
-1. Push these files to the `main` branch of `socialminds-ai/desirable-futures-with-robots`.
-2. **Settings → Pages → Build and deployment → Source: Deploy from a branch → `main` / `(root)`.**
-3. The site will be served at `https://socialminds-ai.github.io/desirable-futures-with-robots/`.
-4. For the custom domain: add a `CNAME` file containing `desirable-futures-with-robots.org` and configure the DNS `CNAME` record to point at `socialminds-ai.github.io`.
+The dev stack reads DB settings from environment variables (see
+`docker-compose.yml`). On a real host, copy `config/secrets.example.php` to
+`config/secrets.php` and fill in the credentials instead.
+
+## Deploying
+
+The site is moving off static GitHub Pages onto a LAMP host (SFTP + MariaDB).
+Deploy tooling is not finalized yet; the essentials:
+
+1. Serve the domain from the `public/` directory (set the domain's document root
+   to `public/`, keeping `lib/`, `db/`, `config/`, and `secrets` outside it).
+2. Copy `config/secrets.example.php` to `config/secrets.php` and fill in the host
+   database credentials.
+3. Run `php db/migrate.php` on the host to apply schema migrations.
 
 ## Things to replace before going live
 
